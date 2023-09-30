@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adtension", "Adtension\Adtension.csproj", "{5B41DB3F-B766-4DEF-9F53-321940AC12C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adtension.BusinessLogic", "Adtension.BusinessLogic\Adtension.BusinessLogic.csproj", "{D2517BEE-103E-4726-975F-191A7944BF79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5B41DB3F-B766-4DEF-9F53-321940AC12C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B41DB3F-B766-4DEF-9F53-321940AC12C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B41DB3F-B766-4DEF-9F53-321940AC12C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2517BEE-103E-4726-975F-191A7944BF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2517BEE-103E-4726-975F-191A7944BF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2517BEE-103E-4726-975F-191A7944BF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2517BEE-103E-4726-975F-191A7944BF79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
