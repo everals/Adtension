@@ -17,9 +17,7 @@ const EmailItem: React.FC<EmailItemProps> = ({ name, time, text, cost, isNew, })
                 }
                 { name }
             </div>
-            <div className="w-8/12">
-                { text }
-            </div>
+            <div className="w-8/12" dangerouslySetInnerHTML={{__html: text}} />
             <div className="w-1/12 text-green-600 font-bold">
                 { cost } $
             </div>

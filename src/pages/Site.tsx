@@ -6,6 +6,18 @@ function Site() {
     const [detailsVisibleIndex, setDetailsVisibleIndex] = useState<number | null>(null);
     const [editBannerIndex, setEditBannerIndex] = useState<number | null>(null);
 
+    // const [bots, setBots] = useState<BotInterface>([]);
+
+    // const addBot = () => {
+    //     setBots([
+    //         ...bots,
+    //         {
+    //             x: 0,
+    //             y: 0,
+    //         },
+    //     ])
+    // };
+
     const showDetails = (index: number) => {
         setDetailsVisibleIndex(index);
     };
