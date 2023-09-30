@@ -3,6 +3,7 @@ import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 
 interface BannerProps {
+    index: number,
     color: string;
     left: number;
     top: number;
@@ -10,9 +11,12 @@ interface BannerProps {
     text: string;
     initialWidth: number;
     initialHeight: number;
+    onClick: Function,
+    isEdit: boolean,
 }
 
 const Banner: React.FC<BannerProps> = ({
+    index,
     color,
     left,
     top,
@@ -20,39 +24,51 @@ const Banner: React.FC<BannerProps> = ({
     text,
     initialWidth,
     initialHeight,
+    onClick,
+    isEdit,
 }) => {
-    const [width, setWidth] = useState(initialWidth);
-    const [height, setHeight] = useState(initialHeight);
+    const bannerClasses = `p-4 border border-black rounded-xl h-full ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
     return (
-    <Draggable
-        scale={1}
-        handle=".handle"
-        bounds={{
-            top: 0,
-        }}
-    >
-        <ResizableBox
-            width={width}
-            height={height}
-            minConstraints={[150, 150]}
-            maxConstraints={[600, 300]}
+        <Draggable
+            scale={1}
+            handle={isEdit ? '.handle' : '#nothing'}
+            bounds={{
+                top: 0,
+            }}
         >
-            <div
-                className={`p-4 border border-black border-solid rounded-xl h-full`}
-                style={{
-                    background: color,
-                }}
+            <ResizableBox
+                width={initialWidth}
+                height={initialHeight}
+                minConstraints={[150, 150]}
+                maxConstraints={[600, 300]}
             >
-                <h2 className="text-white text-lg font-semibold handle">
-                    { title }
-                </h2>
-                <p className="text-white">
-                    { text }
-                </p>
-            </div>
-        </ResizableBox>
-    </Draggable>
+                <div
+                    className={bannerClasses}
+                    style={{
+                        background: color,
+                    }}
+                    onClick={() => onClick(index)}
+                >
+                    <div className="flex justify-between">
+                        <h2 className="text-white text-lg font-semibold">
+                            { title }
+                        </h2>
+                        {
+                            isEdit ?
+                            <div
+                                className={`handle w-3 h-3 bg-white rounded-full cursor-move`}
+                            />
+                            :
+                            null
+                        }
+                    </div>
+                    <p className="text-white">
+                        { text }
+                    </p>
+                </div>
+            </ResizableBox>
+        </Draggable>
     );
 };
 

@@ -5,7 +5,7 @@ interface EmailItemProps {
     time: string;
     text: string;
     cost: number;
-    isNew?: boolean,
+    isNew?: boolean;
 }
 
 const EmailItem: React.FC<EmailItemProps> = ({ name, time, text, cost, isNew, }) => {
@@ -13,7 +13,7 @@ const EmailItem: React.FC<EmailItemProps> = ({ name, time, text, cost, isNew, })
         <div className="bg-gray-200 p-4 rounded mb-4 flex flex-wrap items-center">
             <div className="w-2/12 font-semibold flex items-center">
                 {
-                    <div className={`w-4 h-4 mr-2 rounded-full ${ isNew ? 'bg-green-600' : ''}`}/>
+                    <div className={`w-3 h-3 mr-2 rounded-full ${ isNew ? 'bg-green-500' : ''}`}/>
                 }
                 { name }
             </div>
