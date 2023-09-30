@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
 
-namespace Adtension.Models;
+namespace Adtension.BusinessLogic.Models.Requests.Banners;
 
-public class BannerResponse
+public class BannerCreateRequest
 {
-    public Guid Id { get; set; }
     public string Text { get; set; }
     public string ImageLink { get; set; }
     public string Color { get; set; }

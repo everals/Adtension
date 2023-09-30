@@ -1,6 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Drawing;
+using System.Text.Json.Serialization;
 
-namespace Adtension.Models.Requests.Banners;
+namespace Adtension.BusinessLogic.Models.Requests.Banners;
 
 public class BannerPatchRequest
 {
@@ -10,7 +11,7 @@ public class BannerPatchRequest
     public string ImageLink { get; set; }
     public string Color { get; set; }
     public string ContentLink { get; set; }
-    public Point? Position { get; set; }
-    public Size? Size { get; set; }
-    public Guid? EffectId { get; set; }
+    public Point Position { get; set; }
+    public Size Size { get; set; }
+    public Guid EffectId { get; set; }
 }

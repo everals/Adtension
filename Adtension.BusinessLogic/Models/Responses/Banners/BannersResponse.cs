@@ -1,4 +1,4 @@
-﻿namespace Adtension.Models;
+﻿namespace Adtension.BusinessLogic.Models.Responses.Banners;
 
 public class BannersResponse
 {
