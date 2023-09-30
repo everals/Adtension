@@ -38,3 +38,42 @@ body {
         display: block;
     }
 }
+
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-image: url(https://www.pngmart.com/files/3/Cursor-Arrow-PNG-Picture.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: 300ms;
+    z-index: 999;
+
+    &__anim {
+        border-radius: 50%;
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+        will-change: opacity, width, height, border;
+        top: 0px;
+        left: 0px;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        margin: auto;
+        border: solid black;
+        border-width: 0;
+        z-index: -2;
+    }
+
+    &--click {
+        .cursor__anim {
+            border-width: 2px;
+            width: 50px;
+            height: 50px;
+            opacity: 0;
+            transition: 300ms;
+        }
+    }
+}
