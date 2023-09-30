@@ -37,26 +37,26 @@ function Site() {
         const newBots = deepCopy(bots);
         for (let bot of newBots) {
             const changeVector = () => {
-                bot.vectorY += Math.random() * 2 - 1;
-                bot.vectorX += Math.random() * 2 - 1;
+                bot.vectorY = Math.random() * 2 - 1;
+                bot.vectorX = Math.random() * 2 - 1;
                 if (bot.x < 0) {
                     bot.vectorX = Math.abs(bot.vectorX);
                 }
-                if (bot.y < 0) {
+                if (bot.y < 200) {
                     bot.vectorY = Math.abs(bot.vectorX);
                 }
-                if (bot.x > 1000) {
+                if (bot.x > 1800) {
                     bot.vectorX = -Math.abs(bot.vectorX);
                 }
-                if (bot.y > 1900) {
+                if (bot.y > 1000) {
                     bot.vectorY = -Math.abs(bot.vectorX);
                 }
             }
 
-            bot.x += bot.vectorX * 10;
-            bot.y += bot.vectorY * 10;
+            bot.x += bot.vectorX * 30;
+            bot.y += bot.vectorY * 30;
             
-            if (Math.random() < 0.05 || bot.x < 0 || bot.y < 0  || bot.x > 1000 || bot.y > 1900) {
+            if (Math.random() < 0.1 || bot.x < 0 || bot.y < 200  || bot.x > 1800 || bot.y > 1000) {
                 changeVector();
             }
             
@@ -64,8 +64,8 @@ function Site() {
         if (Math.random() < 0.01) {
             newBots.push(
                 {
-                    x: 0,
-                    y: 0,
+                    x: 200,
+                    y: 200,
                     xVector: 1,
                     yVector: 1,
                     id: id++,
