@@ -57,7 +57,7 @@ function Site() {
             bot.x += bot.vectorX * 30;
             bot.y += bot.vectorY * 30;
 
-            if (Math.random() < 0.01) {
+            if (Math.random() < 0.02) {
                 bot.isClick = !bot.isClick;
             }
             
