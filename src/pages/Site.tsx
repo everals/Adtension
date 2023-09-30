@@ -9,6 +9,7 @@ interface BotInterface {
     y: number;
     xVector: number;
     yVector: number;
+    isClick: boolean,
 };
 
 let id = 0;
@@ -55,6 +56,10 @@ function Site() {
 
             bot.x += bot.vectorX * 30;
             bot.y += bot.vectorY * 30;
+
+            if (Math.random() < 0.01) {
+                bot.isClick = !bot.isClick;
+            }
             
             if (Math.random() < 0.1 || bot.x < 0 || bot.y < 200  || bot.x > 1800 || bot.y > 1000) {
                 changeVector();
@@ -68,6 +73,7 @@ function Site() {
                     y: 200,
                     xVector: 1,
                     yVector: 1,
+                    isClick: false,
                     id: id++,
                 },
             );
