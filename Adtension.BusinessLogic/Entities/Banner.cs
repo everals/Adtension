@@ -3,6 +3,7 @@
 public class Banner
 {
     public Guid Id { get; set; }
+    public bool IsAd { get; set; }
     public string Text { get; set; }
     public string ImageLink { get; set; }
     public string Color { get; set; }

@@ -8,6 +8,7 @@ public static class RequestExtensions
     public static Banner ToModel(this BannerCreateRequest request) => new Banner()
     {
         Id = Guid.NewGuid(),
+        IsAd = request.IsAd,
         Color = request.Color,
         Height = request.Size.Height,
         Text = request.Text,
@@ -22,6 +23,7 @@ public static class RequestExtensions
     public static Banner ToModel(this BannerPatchRequest request) => new Banner()
     {
         Id = request.Id,
+        IsAd = request.IsAd,
         Color = request.Color,
         Height = request.Size.Height,
         Text = request.Text,
