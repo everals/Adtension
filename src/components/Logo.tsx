@@ -26,7 +26,7 @@ const Logo: React.FC<LogoProps> = ({
     onUpdateBannerWidth,
     onUpdateBannerHeight,
 }) => {
-    const bannerClasses = `h-full w-full ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
+    const bannerClasses = `relative h-full ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
 
     const stopHandler = (_: any, ui: {x: number, y: number}) => {
         onUpdateBannerX(ui.x);
@@ -55,7 +55,7 @@ const Logo: React.FC<LogoProps> = ({
                 minConstraints={[50, 50]}
                 maxConstraints={[600, 300]}
             >
-                <div>
+                <div className={bannerClasses}>
                     {
                         isEdit ?
                         <div
@@ -65,8 +65,8 @@ const Logo: React.FC<LogoProps> = ({
                         null
                     }
                     <img
+                        className="h-full w-full"
                         src={src}
-                        className={bannerClasses}
                         onClick={() => onClick(index)}
                     />
                 </div>

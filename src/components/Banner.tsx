@@ -80,7 +80,7 @@ const Banner: React.FC<BannerProps> = ({
                         {
                             isEdit ?
                             <div
-                                className={`handle w-3 h-3 bg-white rounded-full cursor-move`}
+                                className={`handle`}
                             />
                             :
                             null
