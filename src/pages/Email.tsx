@@ -47,7 +47,7 @@ const generateEmails = (): Array<EmailInterface> => {
             messageText: generateAdvertisementRequest(banner, name),
             text: banner.text,
             title: banner.title,
-            price: rand(0, 100),
+            price: rand(1, 8),
             isNew: true,
             isBab: badBannerList.includes(banner),
             isDisable: false,

@@ -63,7 +63,7 @@ const Banner: React.FC<BannerProps> = ({
                 width={width}
                 height={height}
                 minConstraints={[150, 150]}
-                maxConstraints={[600, 300]}
+                maxConstraints={[400, 250]}
             >
                 <div
                     className={bannerClasses}

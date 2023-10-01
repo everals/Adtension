@@ -109,6 +109,7 @@ const initialState: User = {
    banners: startBanners,
    anal: {
       balance: 50,
+      reputation: 50,
       domain: 'https://www.asdsad3fgsa13.xh/',
       hostCount: 8,
    },
@@ -178,6 +179,9 @@ const slice = createSlice({
       setBalance(user, action: PayloadAction<number>) {
          user.anal.balance = action.payload;
       },
+      setReputation(user, action: PayloadAction<number>) {
+         user.anal.reputation = action.payload;
+      },
       setDomain(user, action: PayloadAction<string>) {
          user.anal.domain = action.payload;
       },
@@ -185,4 +189,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-export const { setActiveTab, setEmail, setBanner, addBanner, setRialtos, removeRialto, setBots, setBalance, setDomain, updateEmailDisable, updateEmailIsNew, updateDomain, updateHostCount,  updateBannerX, updateBannerY, updateBannerWidth, updateBannerHeight, } = slice.actions;
+export const { setActiveTab, setEmail, setBanner, addBanner, setRialtos, removeRialto, setBots, setBalance, setReputation, setDomain, updateEmailDisable, updateEmailIsNew, updateDomain, updateHostCount,  updateBannerX, updateBannerY, updateBannerWidth, updateBannerHeight, } = slice.actions;

@@ -36,6 +36,11 @@ function Anal() {
                 </div>
                 <div className="mb-4">
                     <span className="font-semibold">
+                        Репутация:
+                    </span> { user.anal.reputation } ед.
+                </div>
+                <div className="mb-4">
+                    <span className="font-semibold">
                         Название домена:
                     </span> { user.anal.domain }
                 </div>

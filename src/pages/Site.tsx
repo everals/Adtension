@@ -7,15 +7,15 @@ import Logo from "../components/Logo";
 
 import DetailsBanner from "../components/DetailsBanner";
 import Bot from "../components/Bot";
-import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction, updateBannerX as updateBannerXAction, updateBannerY as updateBannerYAction, updateBannerWidth as updateBannerWidthAction, updateBannerHeight as updateBannerHeightAction } from '../redux/user';
+import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction, updateBannerX as updateBannerXAction, updateBannerY as updateBannerYAction, updateBannerWidth as updateBannerWidthAction, updateBannerHeight as updateBannerHeightAction, setReputation as setReputationAction } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
 
 let id = 0;
 
-function isCoordinateInsideAdBlock(x: number, y: number): false | number {
-    const adBlocks = document.querySelectorAll('.ad');
+function isCoordinateInsideAdBlock(x: number, y: number, className: string): false | number {
+    const adBlocks = document.querySelectorAll(className);
     if (!adBlocks) {
         return false;
     }
@@ -44,6 +44,7 @@ function Site() {
     const banners = user.banners;
     const setBots = (payload: Array<BotInterface>) => dispatch(setBotsAction(payload));
     const setBalance = (payload: number) => dispatch(setBalanceAction(payload));
+    const setReputation = (payload: number) => dispatch(setReputationAction(payload));
     const [detailsVisibleIndex, setDetailsVisibleIndex] = useState<number | null>(null);
     const [editBannerIndex, setEditBannerIndex] = useState<number | null>(null);
     const updateBannerX = (payload: { index: number, value: number }) => dispatch(updateBannerXAction(payload));
@@ -95,14 +96,20 @@ function Site() {
             if (Math.random() < 0.02) {
                 bot.isClick = !bot.isClick;
                 if (bot.isClick) {
-                    const sum = isCoordinateInsideAdBlock(bot.x, bot.y)
+                    const sum = isCoordinateInsideAdBlock(bot.x, bot.y, '.ad');
                     if (sum) {
+                        setReputation(user.anal.reputation - 1);
                         setBalance(user.anal.balance + sum);
+                    }
+
+                    const crossNews = isCoordinateInsideAdBlock(bot.x, bot.y, '.news');
+                    if (crossNews !== false) {
+                        setReputation(user.anal.reputation + 0.5);
                     }
                 }
             }
             
-            if (Math.random() < 0.1 || bot.x < 0 || bot.y < 200  || bot.x > 1650 || bot.y > 950) {
+            if (Math.random() * 100 < user.anal.reputation || bot.x < 0 || bot.y < 200  || bot.x > 1650 || bot.y > 950) {
                 changeVector();
             }
             

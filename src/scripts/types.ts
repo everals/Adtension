@@ -81,6 +81,7 @@ export interface Anal {
     balance: number;
     domain: string;
     hostCount: number,
+    reputation: number,
 };
 
 export interface Rialto {
