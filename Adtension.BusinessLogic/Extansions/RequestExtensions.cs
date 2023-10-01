@@ -1,5 +1,6 @@
 ﻿using Adtension.BusinessLogic.Entities;
 using Adtension.BusinessLogic.Models.Requests.Banners;
+using Adtension.BusinessLogic.Models.Requests.Sessions;
 
 namespace Adtension.BusinessLogic.Extansions;
 
@@ -33,5 +34,12 @@ public static class RequestExtensions
         ContentLink = request.ContentLink,
         EffectId = request.EffectId,
         ImageLink = request.ImageLink
+    };
+
+    public static Anal ToModel(this AnalSaveRequest request) => new Anal()
+    {
+        Balance = request.Balance,
+        Domain = request.Domain,
+        MaxUsers = request.MaxUsers
     };
 }

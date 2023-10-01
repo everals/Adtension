@@ -26,4 +26,8 @@ public class SessionsManager
     {
         return sessions[sessionId].Banners;
     }
+
+    public Anal GetAnal(Guid sessionId) => sessions[sessionId].Anal;
+
+    public void SaveAnal(Guid sessionId, Anal anal) => sessions[sessionId].Anal = anal;
 }
