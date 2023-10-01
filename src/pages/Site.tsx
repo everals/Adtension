@@ -54,6 +54,8 @@ function Site() {
 
     const deepCopy = (obj:any) =>  JSON.parse(JSON.stringify(obj)) as typeof obj;
 
+    const rand = (l:number, r:number) => Math.round((r - l) / Math.random());
+
     const showDetails = (index: number) => {
         if (editBannerIndex !== null) {
             return;
@@ -109,16 +111,16 @@ function Site() {
                 }
             }
             
-            if (Math.random() * 100 < user.anal.reputation || bot.x < 0 || bot.y < 200  || bot.x > 1650 || bot.y > 950) {
+            if (Math.random() < 0.07 || bot.x < 0 || bot.y < 200  || bot.x > 1650 || bot.y > 950) {
                 changeVector();
             }
             
         }
-        if (Math.random() < 0.01 && bots.length < user.anal.hostCount) {
+        if (Math.random() < 0.15 && Math.random() * 100 < user.anal.reputation && bots.length < user.anal.hostCount) {
             newBots.push(
                 {
-                    x: 200,
-                    y: 200,
+                    x: rand(200, 800) ,
+                    y: rand(200, 1600),
                     xVector: 1,
                     yVector: 1,
                     isClick: false,
