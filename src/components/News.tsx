@@ -19,7 +19,7 @@ const News: React.FC<NewsProps> = ({
     onClick,
     isEdit,
 }) => {
-    const bannerClasses = `p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
+    const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
     return (
         <Draggable
@@ -40,14 +40,14 @@ const News: React.FC<NewsProps> = ({
                     className={bannerClasses}
                     onClick={() => onClick(index)}
                 >
-                    <div className="news flex justify-between">
+                    <div className="flex justify-between">
                         <h2 className="news__title text-black text-lg font-bold mb-3">
                             { title }
                         </h2>
                         {
                             isEdit ?
                             <div
-                                className={`handle w-3 h-3 bg-white rounded-full cursor-move`}
+                                className={`handle`}
                             />
                             :
                             null

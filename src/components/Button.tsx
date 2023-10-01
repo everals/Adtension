@@ -43,6 +43,14 @@ const Button: React.FC<ButtonProps> = ({
                 className={buttonClasses}
                 onClick={() => onClick(index)}
             >
+                {
+                    isEdit ?
+                    <div
+                        className={`handle`}
+                    />
+                    :
+                    null
+                }
                 { text }
             </div>
         </Draggable>

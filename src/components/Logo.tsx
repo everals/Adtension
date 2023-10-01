@@ -35,11 +35,21 @@ const Logo: React.FC<LogoProps> = ({
                 minConstraints={[50, 50]}
                 maxConstraints={[600, 300]}
             >
-                <img
-                    src={src}
-                    className={bannerClasses}
-                    onClick={() => onClick(index)}
-                />
+                <div>
+                    {
+                        isEdit ?
+                        <div
+                            className={`handle`}
+                        />
+                        :
+                        null
+                    }
+                    <img
+                        src={src}
+                        className={bannerClasses}
+                        onClick={() => onClick(index)}
+                    />
+                </div>
             </ResizableBox>
         </Draggable>
     );

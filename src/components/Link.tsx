@@ -43,6 +43,14 @@ const Link: React.FC<LinkProps> = ({
                 onClick={() => onClick(index)}
                 style={{color: color}}
             >
+                {
+                    isEdit ?
+                    <div
+                        className={`handle`}
+                    />
+                    :
+                    null
+                }
                 { text }
             </div>
         </Draggable>

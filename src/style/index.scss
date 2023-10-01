@@ -81,6 +81,9 @@ body {
 }
 
 .news {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     &__title {
         font-family: 'Lora', serif;;
     }
@@ -98,6 +101,18 @@ body {
     &-9 { font-family: 'Rubik Mono One', sans-serif; }
     &-10 { font-family: 'Russo One', sans-serif; }
     &-11 { font-family: 'Sofia Sans', sans-serif; }
+}
+
+.handle {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: move;
+    border: 1px solid black;
 }
 
 
