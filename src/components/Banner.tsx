@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef } from "react";
 import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 import { Banner as BannerInterface } from '../scripts/types';
@@ -42,6 +42,7 @@ const Banner: React.FC<BannerProps> = ({
 }) => {
     const [ isEdit, setIsEdit ] = useState(false);
     const [ random, setRandom ] = useState(rand(1, 11));
+    const blockRef = createRef();
     const [ bounds, setBounds ] = useState({
         top: 0,
         left: 0,
@@ -56,28 +57,31 @@ const Banner: React.FC<BannerProps> = ({
         onUpdateBannerY(ui.y);
     };
 
-    const startHandler = () => {
+    const dragHandler = (_: any, ui: {x: number, y: number}) => {
         const blocks = document.querySelectorAll('.ad, .news') as NodeListOf<HTMLDivElement>;
         let top = 0;
         let left = 0;
         let right = window.innerWidth - 200;
         let bottom = window.innerHeight - 300;
         for (let block of blocks) {
-            const mainBlock = { x, y, width, height };
+            if (blockRef.current === block) {
+                continue;
+            }
+            const mainBlock = { x: ui.x, y: ui.y + 144, width, height };
             const extraBlock = block.getBoundingClientRect();
             if (isHorizontalOverlap(mainBlock, extraBlock)) {
                 if (mainBlock.y < extraBlock.y) {
-                    bottom = Math.min(bottom, extraBlock.y)
+                    bottom = Math.min(bottom, extraBlock.y - mainBlock.height - 144)
                 } else {
-                    top = Math.max(top, extraBlock.y)
+                    top = Math.max(top, extraBlock.y + extraBlock.height  - 144)
                 }
             }
 
             if (isVerticalOverlap(mainBlock, extraBlock)) {
                 if (mainBlock.x < extraBlock.x) {
-                    right = Math.min(right, extraBlock.x)
+                    right = Math.min(right, extraBlock.x - mainBlock.width)
                 } else {
-                    left = Math.max(left, extraBlock.x );
+                    left = Math.max(left, extraBlock.x + extraBlock.width);
                 }
             }
         }
@@ -92,7 +96,7 @@ const Banner: React.FC<BannerProps> = ({
     return (
         <Draggable
             onStop={stopHandler}
-            onStart={startHandler}
+            onDrag={dragHandler}
             scale={1}
             defaultPosition={{x, y}}
             handle={isEdit ? '#nothing' : undefined}
@@ -113,6 +117,7 @@ const Banner: React.FC<BannerProps> = ({
                     data-price={price}
                     onDoubleClick={() => setIsEdit(!isEdit)}
                     onClick={() => setIsEdit(false)}
+                    ref={blockRef as React.RefObject<HTMLDivElement>}
                 >
                     <div className="flex justify-between">
                         <h2 className="text-white text-lg font-semibold">
@@ -121,13 +126,13 @@ const Banner: React.FC<BannerProps> = ({
                         {
                             isEdit ?
                             <>
-                            <Info
-                                income={price}
-                                reputation={-1}
-                            />
-                            <div
-                                className={`handle`}
-                            />
+                                <Info
+                                    income={price}
+                                    reputation={-1}
+                                />
+                                <div
+                                    className={`handle`}
+                                />
                             </>
                             :
                             null

@@ -97,13 +97,13 @@ const Tabs: React.FC = () => {
             </div>
         </div>
 
-        <div className="mt-8 px-14">
+        <div className="">
             { tabs.map((tab, index) => (
                 <div
-                key={index}
-                className={`${activeTab === index ? 'block' : 'hidden'}`}
+                    key={tab}
+                    className={`${activeTab === index ? 'block' : 'hidden'}`}
                 >
-                    { getTabContent(activeTab) }
+                    { getTabContent(index) }
                 </div>
             )) }
         </div>
