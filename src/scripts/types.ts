@@ -1,9 +1,12 @@
 export interface Email {
     name: string;
     time: string;
+    messageText: string,
     text: string;
-    cost: number;
+    title: string;
+    price: number;
     isNew: boolean;
+    isDisable: boolean,
 };
 
 export interface Banner {

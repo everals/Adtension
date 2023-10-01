@@ -26,8 +26,8 @@ function Anal() {
     return (
         <div className="tab">
             <div className="p-4">
-                <div className="text-xl font-semibold mb-4">
-                    Информация о домене
+                <div className="text-xl font-semibold mb-6">
+                    Аналитика сайта
                 </div>
                 <div className="mb-4">
                     <span className="font-semibold">

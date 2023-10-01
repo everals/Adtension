@@ -4,12 +4,14 @@ import Site from './pages/Site';
 import Email from "./pages/Email";
 import Rialto from './pages/Rialto';
 import { useSelector, useDispatch } from 'react-redux';
+import { setActiveTab as setActiveTabAction, } from './redux/user';
 import { RootState } from './redux/store';
 
 const Tabs: React.FC = () => {
-    const [activeTab, setActiveTab] = useState(0);
     const dispatch = useDispatch();
     const domen = useSelector((state: RootState) => state.user.anal.domen);
+    const activeTab = useSelector((state: RootState) => state.user.activeTab);
+    const setActiveTab = (payload: number) => dispatch(setActiveTabAction(payload));
 
     const tabs = [
         'Панель администратора',

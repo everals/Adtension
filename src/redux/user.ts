@@ -3,6 +3,8 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { Email, Banner, Anal, Rialto, Bot, Button, News, Logo, Link, AllTypesOfBlocks, } from '../scripts/types';
 
 interface User {
+   lastBannerId: number,
+   activeTab: number,
    emails: Array<Email>
    banners: Array<AllTypesOfBlocks>
    anal: Anal,
@@ -101,6 +103,8 @@ const startBanners: Array<AllTypesOfBlocks> = [
 ];
 
 const initialState: User = {
+   lastBannerId: 10,
+   activeTab: 0,
    emails: [],
    banners: startBanners,
    anal: {
@@ -117,11 +121,26 @@ const slice = createSlice({
    initialState,
 
    reducers: {
+      setActiveTab(user, action: PayloadAction<number>) {
+         user.activeTab = action.payload;
+      },
       setEmail(user, action: PayloadAction<Array<Email>>) {
          user.emails = action.payload;
       },
+      updateEmailDisable(user, action: PayloadAction<{ index: number, value: boolean }>) {
+         user.emails[action.payload.index].isDisable = action.payload.value;
+      },
+      updateEmailIsNew(user, action: PayloadAction<{ index: number, value: boolean }>) {
+         user.emails[action.payload.index].isNew = action.payload.value;
+      },
       setBanner(user, action: PayloadAction<Array<Banner>>) {
          user.banners = action.payload;
+      },
+      addBanner(user, action: PayloadAction<Banner>) {
+         user.banners.push({
+            ...action.payload,
+            bannerId: user.lastBannerId++,
+         });
       },
       setRialto(user, action: PayloadAction<Array<Rialto>>) {
          user.rialtos = action.payload;
@@ -139,4 +158,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-export const { setEmail, setBanner, setRialto, setBots, setBalance, setDomen, } = slice.actions;
+export const { setActiveTab, setEmail, setBanner, addBanner, setRialto, setBots, setBalance, setDomen, updateEmailDisable, updateEmailIsNew, } = slice.actions;
