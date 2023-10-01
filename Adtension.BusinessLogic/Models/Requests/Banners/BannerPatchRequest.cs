@@ -1,16 +1,18 @@
-﻿namespace Adtension.BusinessLogic.Entities;
+﻿using System.Drawing;
+using System.Text.Json.Serialization;
 
-public class Banner
+namespace Adtension.BusinessLogic.Models.Requests.Banners;
+
+public class BannerPatchRequest
 {
+    [JsonIgnore]
     public Guid Id { get; set; }
     public bool IsAd { get; set; }
     public string Text { get; set; }
     public string ImageLink { get; set; }
     public string Color { get; set; }
     public string ContentLink { get; set; }
-    public int X { get; set; }
-    public int Y { get; set; }
-    public int Width { get; set; }
-    public int Height { get; set; }
+    public Point Position { get; set; }
+    public Size Size { get; set; }
     public Guid EffectId { get; set; }
 }
