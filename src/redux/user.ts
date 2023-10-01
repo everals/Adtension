@@ -103,7 +103,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
 ];
 
 const initialState: User = {
-   lastBannerId: 6,
+   lastBannerId: 7,
    activeTab: 0,
    emails: [],
    banners: startBanners,
