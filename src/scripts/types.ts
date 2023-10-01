@@ -77,6 +77,7 @@ export interface Logo {
 export interface Anal {
     balance: number;
     domen: string;
+    hostCount: number,
 };
 
 export interface Rialto {
