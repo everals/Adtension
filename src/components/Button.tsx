@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
     fontType,
 }) => {
     const [random, setRandom] = useState(rand(1, 11));
-    const buttonClasses = `p-3 border text-white font-bold rounded-xl ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
+    const buttonClasses = `p-3 border text-white font-bold rounded-xl ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
 
     return (
         <Draggable
@@ -42,6 +42,7 @@ const Button: React.FC<ButtonProps> = ({
                 style={{ background: color, }}
                 className={buttonClasses}
                 onClick={() => onClick(index)}
+                data-price={price}
             >
                 {
                     isEdit ?

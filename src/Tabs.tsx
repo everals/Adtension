@@ -10,6 +10,7 @@ import { RootState } from './redux/store';
 const Tabs: React.FC = () => {
     const dispatch = useDispatch();
     const domen = useSelector((state: RootState) => state.user.anal.domain);
+    const balance = useSelector((state: RootState) => state.user.anal.balance);
     const activeTab = useSelector((state: RootState) => state.user.activeTab);
     const setActiveTab = (payload: number) => dispatch(setActiveTabAction(payload));
 
@@ -63,11 +64,13 @@ const Tabs: React.FC = () => {
             )) }
         </div>
 
-        <div className="bg-gray-200 flex space-x-2 px-14 py-4">
+        <div className="flex justify-between items-center bg-gray-200 space-x-2 px-14 py-4">
             <div className="bg-white rounded w-1/2 px-4 py-2">
                 { getTabUrl(activeTab) }
             </div>
-
+            <div className="text-green-500 font-bold text-xl">
+                { balance } $
+            </div>
         </div>
 
         <div className="mt-8 px-14">

@@ -24,10 +24,11 @@ const Banner: React.FC<BannerProps> = ({
     onClick,
     isEdit,
     fontType,
+    price,
 }) => {
     const [random, setRandom] = useState(rand(1, 11));
 
-    const bannerClasses = `p-4 border border-black rounded-xl h-full ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
+    const bannerClasses = `p-4 border border-black rounded-xl h-full ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
     return (
         <Draggable
@@ -49,6 +50,7 @@ const Banner: React.FC<BannerProps> = ({
                     style={{
                         background: color,
                     }}
+                    data-price={price}
                     onClick={() => onClick(index)}
                 >
                     <div className="flex justify-between">

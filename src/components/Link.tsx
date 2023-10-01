@@ -27,7 +27,7 @@ const Link: React.FC<LinkProps> = ({
     fontType,
 }) => {
     const [random, setRandom] = useState(rand(1, 11));
-    const linkClasses = `ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
+    const linkClasses = `ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
     return (
         <Draggable
@@ -42,6 +42,7 @@ const Link: React.FC<LinkProps> = ({
                 className={linkClasses}
                 onClick={() => onClick(index)}
                 style={{color: color}}
+                data-price={price}
             >
                 {
                     isEdit ?

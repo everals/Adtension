@@ -110,7 +110,7 @@ const initialState: User = {
    anal: {
       balance: 50,
       domain: 'https://www.asdsad3fgsa13.xh/',
-      hostCount: 10,
+      hostCount: 8,
    },
    rialtos: [],
    bots: [],

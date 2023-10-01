@@ -7,12 +7,35 @@ import Logo from "../components/Logo";
 
 import DetailsBanner from "../components/DetailsBanner";
 import Bot from "../components/Bot";
-import { setEmail as setEmailAction, setBots as setBotsAction, } from '../redux/user';
+import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
 
 let id = 0;
+
+function isCoordinateInsideAdBlock(x: number, y: number): false | number {
+    const adBlocks = document.querySelectorAll('.ad');
+    if (!adBlocks) {
+        return false;
+    }
+    for (const adBlock of adBlocks) {
+        const rect = adBlock.getBoundingClientRect();
+        if (
+            x >= rect.left &&
+            x <= rect.right &&
+            y >= rect.top &&
+            y <= rect.bottom
+        ) {
+            if (adBlock instanceof HTMLElement) {
+                return parseInt(adBlock.dataset.price || '0') || 0;
+            } else {
+                return 0;
+            }
+        }
+    }
+    return false;
+}
 
 function Site() {
     const dispatch = useDispatch();
@@ -20,6 +43,7 @@ function Site() {
     const bots = user.bots;
     const banners = user.banners;
     const setBots = (payload: Array<BotInterface>) => dispatch(setBotsAction(payload));
+    const setBalance = (payload: number) => dispatch(setBalanceAction(payload));
     const [detailsVisibleIndex, setDetailsVisibleIndex] = useState<number | null>(null);
     const [editBannerIndex, setEditBannerIndex] = useState<number | null>(null);
 
@@ -66,6 +90,12 @@ function Site() {
 
             if (Math.random() < 0.02) {
                 bot.isClick = !bot.isClick;
+                if (bot.isClick) {
+                    const sum = isCoordinateInsideAdBlock(bot.x, bot.y)
+                    if (sum) {
+                        setBalance(user.anal.balance + sum);
+                    }
+                }
             }
             
             if (Math.random() < 0.1 || bot.x < 0 || bot.y < 200  || bot.x > 1800 || bot.y > 1000) {
@@ -73,7 +103,7 @@ function Site() {
             }
             
         }
-        if (Math.random() < 0.01) {
+        if (Math.random() < 0.01 && bots.length < user.anal.hostCount) {
             newBots.push(
                 {
                     x: 200,
