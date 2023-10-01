@@ -1,15 +1,16 @@
 import React from 'react';
 import RialtoItem from "../components/RialtoItem";
-
-const rialtos = [
-    {
-        name: 'Контент-мейкер',
-        text: 'Пишу тексты на тему рыбалки с 14 лет. Опыт диганский!',
-        price: 100,
-    },
-];
+import { setRialto as setRialtoAction } from '../redux/user';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
+import { Rialto as RialtoInterface } from '../scripts/types';
 
 function Rialto() {
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user);
+    const rialtos = user.rialtos;
+    const setRialtos = (payload: Array<RialtoInterface>) => dispatch(setRialtoAction(payload));
+
     return (
         <div className="tab">
             <div>

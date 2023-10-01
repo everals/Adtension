@@ -1,14 +1,9 @@
 import React from 'react';
-
-interface RialtoItemProps {
-    name: string;
-    text: string;
-    price: number;
-};
+import { Rialto as RialtoInterface } from '../scripts/types';
 
 const handleClick = () => {};
 
-const RialtoItem: React.FC<RialtoItemProps> = ({ name, text, price, }) => {
+const RialtoItem: React.FC<RialtoInterface> = ({ name, text, price, }) => {
     return (
     <div className="bg-gray-200 rounded-xl p-4 w-3/12">
         <h2 className="text-xl font-semibold mb-2">

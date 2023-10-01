@@ -1,28 +1,34 @@
 import React, { useEffect, useState, } from 'react';
 import Banner from "../components/Banner";
+import Link from "../components/Link";
+import Button from "../components/Button";
+import News from "../components/News";
+import Logo from "../components/Logo";
+
 import DetailsBanner from "../components/DetailsBanner";
 import Bot from "../components/Bot";
-
-interface BotInterface {
-    id: number;
-    x: number;
-    y: number;
-    xVector: number;
-    yVector: number;
-    isClick: boolean,
-};
+import { setEmail as setEmailAction, setBots as setBotsAction, } from '../redux/user';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
+import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
 
 let id = 0;
 
 function Site() {
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user);
+    const bots = user.bots;
+    const banners = user.banners;
+    const setBots = (payload: Array<BotInterface>) => dispatch(setBotsAction(payload));
     const [detailsVisibleIndex, setDetailsVisibleIndex] = useState<number | null>(null);
     const [editBannerIndex, setEditBannerIndex] = useState<number | null>(null);
 
-    const [bots, setBots] = useState<Array<BotInterface>>([]);
-
-    const deepCopy = (obj:any) =>  JSON.parse(JSON.stringify(obj));
+    const deepCopy = (obj:any) =>  JSON.parse(JSON.stringify(obj)) as typeof obj;
 
     const showDetails = (index: number) => {
+        if (editBannerIndex !== null) {
+            return;
+        }
         setDetailsVisibleIndex(index);
     };
 
@@ -102,31 +108,81 @@ function Site() {
                 ))
             }
 
-            <Banner
-                color="#36a1d5"
-                left={100}
-                top={100}
-                title="My Banner"
-                text="This is a banner component."
-                initialWidth={300}
-                initialHeight={300}
-                onClick={showDetails}
-                isEdit={editBannerIndex === 1}
-                index={1}
-            />
+            {
+                banners.filter((ban): ban is BannerInterface => "isBanner" in ban).map((banner, index) => (
+                    <Banner
+                        key={banner.bannerId}
+                        {...banner}
+                        onClick={showDetails}
+                        isEdit={editBannerIndex === banner.bannerId}
+                        index={banner.bannerId}
+                    />
+                ))
+            }
 
-            <DetailsBanner
-                isOpen={detailsVisibleIndex !== null}
-                onHide={hideDetails}
-                onEdit={editBanner}
-                title="My Banner"
-                src="https://github.com/everals/Adtension"
-                owner="Илья Песович"
-                price={100}
-                bannerId={1}
-                index={1}
-                isEdit={editBannerIndex === 1}
-            />
+            {
+                banners.filter((link): link is LinkInterface => "isLink" in link).map((link, index) => (
+                    <Link
+                        key={link.bannerId}
+                        {...link}
+                        onClick={showDetails}
+                        isEdit={editBannerIndex === link.bannerId}
+                        index={link.bannerId}
+                    />
+                ))
+            }
+
+            {
+                banners.filter((button): button is ButtonInterface => "isButton" in button).map((button, index) => (
+                    <Button
+                        key={button.bannerId}
+                        {...button}
+                        onClick={showDetails}
+                        isEdit={editBannerIndex === button.bannerId}
+                        index={button.bannerId}
+                    />
+                ))
+            }
+
+
+            {
+                banners.filter((news): news is NewsInterface => "isNews" in news).map((news, index) => (
+                    <News
+                        key={news.bannerId}
+                        {...news}
+                        onClick={showDetails}
+                        isEdit={editBannerIndex === news.bannerId}
+                        index={news.bannerId}
+                    />
+                ))
+            }
+
+
+            {
+                banners.filter((logo): logo is LogoInterface => "isLogo" in logo).map((logo, index) => (
+                    <Logo
+                        key={logo.bannerId}
+                        {...logo}
+                        onClick={showDetails}
+                        isEdit={editBannerIndex === logo.bannerId}
+                        index={logo.bannerId}
+                    />
+                ))
+            }
+
+
+            {
+                detailsVisibleIndex !== null ?
+                <DetailsBanner
+                    onHide={hideDetails}
+                    onEdit={editBanner}
+                    {...banners[detailsVisibleIndex]}
+                    index={detailsVisibleIndex}
+                    isEdit={editBannerIndex !== null}
+                />
+                :
+                null
+            }
         </div>
     );
 }

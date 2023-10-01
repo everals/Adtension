@@ -1,12 +1,7 @@
 import React from "react";
+import { Email as EmailInterface } from '../scripts/types';
 
-interface EmailItemProps {
-    name: string;
-    time: string;
-    text: string;
-    cost: number;
-    isNew?: boolean;
-}
+interface EmailItemProps extends EmailInterface {}
 
 const EmailItem: React.FC<EmailItemProps> = ({ name, time, text, cost, isNew, }) => {
     return (
