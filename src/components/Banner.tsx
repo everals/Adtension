@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 import { Banner as BannerInterface } from '../scripts/types';
+import Info from '../components/Info';
+
 interface BannerProps extends BannerInterface {
     index: number,
-    onClick: Function,
-    isEdit: boolean,
     onUpdateBannerX: (val: number) => void,
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
@@ -25,8 +25,6 @@ const Banner: React.FC<BannerProps> = ({
     text,
     width,
     height,
-    onClick,
-    isEdit,
     fontType,
     price,
     onUpdateBannerX,
@@ -34,6 +32,7 @@ const Banner: React.FC<BannerProps> = ({
     onUpdateBannerWidth,
     onUpdateBannerHeight,
 }) => {
+    const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
 
     const bannerClasses = `p-4 border border-black rounded-xl h-full ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
@@ -53,7 +52,7 @@ const Banner: React.FC<BannerProps> = ({
             onStop={stopHandler}
             scale={1}
             defaultPosition={{x, y}}
-            handle={isEdit ? '.handle' : '#nothing'}
+            handle={isEdit ? '#nothing' : undefined}
             bounds={{
                 top: 0,
             }}
@@ -71,7 +70,8 @@ const Banner: React.FC<BannerProps> = ({
                         background: color,
                     }}
                     data-price={price}
-                    onClick={() => onClick(index)}
+                    onDoubleClick={() => setIsEdit(!isEdit)}
+                    onClick={() => setIsEdit(false)}
                 >
                     <div className="flex justify-between">
                         <h2 className="text-white text-lg font-semibold">
@@ -79,9 +79,15 @@ const Banner: React.FC<BannerProps> = ({
                         </h2>
                         {
                             isEdit ?
+                            <>
+                            <Info
+                                income={price}
+                                reputation={-1}
+                            />
                             <div
                                 className={`handle`}
                             />
+                            </>
                             :
                             null
                         }

@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 import { Button as ButtonInterface } from '../scripts/types';
+import Info from '../components/Info';
 
 interface ButtonProps extends ButtonInterface {
     index: number,
-    onClick: Function,
-    isEdit: boolean,
     onUpdateBannerX: (val: number) => void,
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
@@ -24,16 +23,15 @@ const Button: React.FC<ButtonProps> = ({
     y,
     src,
     text,
-    isEdit,
     owner,
     price,
-    onClick,
     fontType,
     onUpdateBannerX,
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
 }) => {
+    const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
     const buttonClasses = `p-3 border text-white font-bold rounded-xl ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
 
@@ -47,22 +45,29 @@ const Button: React.FC<ButtonProps> = ({
             onStop={stopHandler}
             defaultPosition={{x, y}}
             scale={1}
-            handle={isEdit ? '.handle' : '#nothing'}
             bounds={{
                 top: 0,
             }}
+            handle={isEdit ? '#nothing' : undefined}
         >
             <div
                 style={{ background: color, }}
                 className={buttonClasses}
-                onClick={() => onClick(index)}
+                onDoubleClick={() => setIsEdit(!isEdit)}
+                onClick={() => setIsEdit(false)}
                 data-price={price}
             >
                 {
                     isEdit ?
-                    <div
-                        className={`handle`}
-                    />
+                    <>
+                        <div
+                            className={`handle`}
+                        />
+                        <Info
+                            income={price}
+                            reputation={-1}
+                        />
+                    </>
                     :
                     null
                 }

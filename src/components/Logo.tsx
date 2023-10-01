@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 import { Logo as LogoInterface } from '../scripts/types';
+import Info from '../components/Info';
 interface LogoProps extends LogoInterface {
     index: number,
-    onClick: Function,
-    isEdit: boolean,
     onUpdateBannerX: (val: number) => void,
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
@@ -18,14 +17,13 @@ const Logo: React.FC<LogoProps> = ({
     y,
     width,
     height,
-    onClick,
-    isEdit,
     src,
     onUpdateBannerX,
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
 }) => {
+    const [ isEdit, setIsEdit ] = useState(false);
     const bannerClasses = `relative h-full ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
 
     const stopHandler = (_: any, ui: {x: number, y: number}) => {
@@ -43,10 +41,10 @@ const Logo: React.FC<LogoProps> = ({
             onStop={stopHandler}
             scale={1}
             defaultPosition={{x, y}}
-            handle={isEdit ? '.handle' : '#nothing'}
             bounds={{
                 top: 0,
             }}
+            handle={isEdit ? '#nothing' : undefined}
         >
             <ResizableBox
                 onResize={handleResize}
@@ -55,19 +53,28 @@ const Logo: React.FC<LogoProps> = ({
                 minConstraints={[50, 50]}
                 maxConstraints={[600, 300]}
             >
-                <div className={bannerClasses}>
+                <div
+                    className={bannerClasses}
+                    onDoubleClick={() => setIsEdit(!isEdit)}
+                    onClick={() => setIsEdit(false)}
+                >
                     {
                         isEdit ?
-                        <div
-                            className={`handle`}
-                        />
+                        <>
+                            <Info
+                                income={0}
+                                reputation={0.5}
+                            />
+                            <div
+                                className={`handle`}
+                            />
+                        </>
                         :
                         null
                     }
                     <img
                         className="h-full w-full"
                         src={src}
-                        onClick={() => onClick(index)}
                     />
                 </div>
             </ResizableBox>

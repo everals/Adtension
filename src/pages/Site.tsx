@@ -155,8 +155,6 @@ function Site() {
                     <Banner
                         key={banner.bannerId}
                         {...banner}
-                        onClick={showDetails}
-                        isEdit={editBannerIndex === banner.bannerId}
                         index={banner.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: banner.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: banner.bannerId, value})}
@@ -171,8 +169,6 @@ function Site() {
                     <Link
                         key={link.bannerId}
                         {...link}
-                        onClick={showDetails}
-                        isEdit={editBannerIndex === link.bannerId}
                         index={link.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: link.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: link.bannerId, value})}
@@ -187,8 +183,6 @@ function Site() {
                     <Button
                         key={button.bannerId}
                         {...button}
-                        onClick={showDetails}
-                        isEdit={editBannerIndex === button.bannerId}
                         index={button.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: button.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: button.bannerId, value})}
@@ -204,8 +198,6 @@ function Site() {
                     <News
                         key={news.bannerId}
                         {...news}
-                        onClick={showDetails}
-                        isEdit={editBannerIndex === news.bannerId}
                         index={news.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: news.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: news.bannerId, value})}
@@ -221,8 +213,6 @@ function Site() {
                     <Logo
                         key={logo.bannerId}
                         {...logo}
-                        onClick={showDetails}
-                        isEdit={editBannerIndex === logo.bannerId}
                         index={logo.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: logo.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: logo.bannerId, value})}
@@ -234,16 +224,16 @@ function Site() {
 
 
             {
-                detailsVisibleIndex !== null ?
-                <DetailsBanner
-                    onHide={hideDetails}
-                    onEdit={editBanner}
-                    {...banners[detailsVisibleIndex]}
-                    index={detailsVisibleIndex}
-                    isEdit={editBannerIndex !== null}
-                />
-                :
-                null
+                // detailsVisibleIndex !== null ?
+                // <DetailsBanner
+                //     onHide={hideDetails}
+                //     onEdit={editBanner}
+                //     {...banners[detailsVisibleIndex]}
+                //     index={detailsVisibleIndex}
+                //     isEdit={editBannerIndex !== null}
+                // />
+                // :
+                // null
             }
         </div>
     );

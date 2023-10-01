@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 import { Link as LinkInterface } from '../scripts/types';
+import Info from '../components/Info';
 
 interface LinkProps extends LinkInterface {
     index: number,
-    onClick: Function,
-    isEdit: boolean,
     onUpdateBannerX: (val: number) => void,
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
@@ -24,16 +23,15 @@ const Link: React.FC<LinkProps> = ({
     y,
     src,
     text,
-    isEdit,
     owner,
     price,
-    onClick,
     fontType,
     onUpdateBannerX,
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
 }) => {
+    const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
     const linkClasses = `ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
@@ -47,22 +45,29 @@ const Link: React.FC<LinkProps> = ({
             onStop={stopHandler}
             scale={1}
             defaultPosition={{x, y}}
-            handle={isEdit ? '.handle' : '#nothing'}
             bounds={{
                 top: 0,
             }}
+            handle={isEdit ? '#nothing' : undefined}
         >
             <div
                 className={linkClasses}
-                onClick={() => onClick(index)}
+                onDoubleClick={() => setIsEdit(!isEdit)}
+                onClick={() => setIsEdit(false)}
                 style={{color: color}}
                 data-price={price}
             >
                 {
                     isEdit ?
-                    <div
-                        className={`handle`}
-                    />
+                    <>
+                        <Info
+                            income={price}
+                            reputation={-1}
+                        />
+                        <div
+                            className={`handle`}
+                        />
+                    </>
                     :
                     null
                 }

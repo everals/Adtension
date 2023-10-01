@@ -104,6 +104,10 @@ body {
     &-9 { font-family: 'Rubik Mono One', sans-serif; }
     &-10 { font-family: 'Russo One', sans-serif; }
     &-11 { font-family: 'Sofia Sans', sans-serif; }
+
+    &__info {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
 }
 
 .handle {
