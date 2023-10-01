@@ -79,17 +79,20 @@ export interface Logo {
 
 export interface Anal {
     balance: number;
-    domen: string;
+    domain: string;
     hostCount: number,
 };
 
 export interface Rialto {
     name: string;
-    text: string;
+    about: string;
     price: number;
     age: number;
     work: string;
-    img?: string;
+    src?: string;
+    count?: number;
+    domain?: string;
+    topic?: string;
 };
 
 export interface Bot {

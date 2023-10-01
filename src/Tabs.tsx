@@ -9,7 +9,7 @@ import { RootState } from './redux/store';
 
 const Tabs: React.FC = () => {
     const dispatch = useDispatch();
-    const domen = useSelector((state: RootState) => state.user.anal.domen);
+    const domen = useSelector((state: RootState) => state.user.anal.domain);
     const activeTab = useSelector((state: RootState) => state.user.activeTab);
     const setActiveTab = (payload: number) => dispatch(setActiveTabAction(payload));
 
