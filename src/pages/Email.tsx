@@ -1,18 +1,13 @@
 import React, { useState, useEffect, } from 'react';
 import EmailItem from "../components/EmailItem";
-import { greetings, farewells, requests, names } from "../emailTemplates";
-import { bannerList, badBannerList } from "../bannerTemplates";
+import { greetings, farewells, requests, names } from "../scripts/emailTemplates";
+import { bannerList, badBannerList } from "../scripts/bannerTemplates";
+import { Email as EmailInterface, Banner, Anal, Rialto, Bot, } from '../scripts/types';
+import { setEmail as setEmailAction,} from '../redux/user';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const banners = [...bannerList, ...badBannerList];
-
-interface EmailInterface {
-    name: string,
-    time: string,
-    text: string,
-    cost: number,
-    isNew: boolean,
-    isBab: boolean,
-}
 
 function generateAdvertisementRequest(mail: { title: string, text: string }, owner: string): string {
     const greeting = greetings[Math.floor(Math.random() * greetings.length)];
@@ -59,9 +54,15 @@ const generateEmails = (): Array<EmailInterface> => {
 };
 
 function Email() {
-    const [ emails, setEmails ] = useState<Array<EmailInterface>>([]);
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user);
+    const emails = user.emails;
+    const setEmails = (payload: Array<EmailInterface>) => dispatch(setEmailAction(payload));
 
     useEffect(() => {
+        if (emails.length) {
+            return;
+        }
         setEmails(generateEmails());
     }, []);
 

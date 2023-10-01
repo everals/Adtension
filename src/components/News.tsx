@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
-import { Banner as BannerInterface } from '../scripts/types';
-interface BannerProps extends BannerInterface {
+import { News as NewsInterface } from '../scripts/types';
+interface NewsProps extends NewsInterface {
     index: number,
     onClick: Function,
     isEdit: boolean,
 }
 
-function rand (a:number, b: number): number {
-    return Math.floor(Math.random() * (b - a + 1) + a);
-}
-
-const Banner: React.FC<BannerProps> = ({
+const News: React.FC<NewsProps> = ({
     index,
-    color,
     x,
     y,
     title,
@@ -23,11 +18,8 @@ const Banner: React.FC<BannerProps> = ({
     height,
     onClick,
     isEdit,
-    fontType,
 }) => {
-    const [random, setRandom] = useState(rand(1, 11));
-
-    const bannerClasses = `p-4 border border-black rounded-xl h-full ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
+    const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
     return (
         <Draggable
@@ -46,25 +38,22 @@ const Banner: React.FC<BannerProps> = ({
             >
                 <div
                     className={bannerClasses}
-                    style={{
-                        background: color,
-                    }}
                     onClick={() => onClick(index)}
                 >
                     <div className="flex justify-between">
-                        <h2 className="text-white text-lg font-semibold">
+                        <h2 className="news__title text-black text-lg font-bold mb-3">
                             { title }
                         </h2>
                         {
                             isEdit ?
                             <div
-                                className={`handle w-3 h-3 bg-white rounded-full cursor-move`}
+                                className={`handle`}
                             />
                             :
                             null
                         }
                     </div>
-                    <p className="text-white">
+                    <p className="text-black">
                         { text }
                     </p>
                 </div>
@@ -73,4 +62,4 @@ const Banner: React.FC<BannerProps> = ({
     );
 };
 
-export default Banner;
+export default News;

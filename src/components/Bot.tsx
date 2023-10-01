@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface BotProps {
-    id: number;
-    x: number;
-    y: number;
-    isClick: boolean;
-};
+import { Bot as BotProps, } from '../scripts/types';
 
 const Bot: React.FC<BotProps> = ({ x, y, isClick, }) => {
     const style: React.CSSProperties = {

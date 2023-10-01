@@ -3,9 +3,13 @@ import Anal from './pages/Anal';
 import Site from './pages/Site';
 import Email from "./pages/Email";
 import Rialto from './pages/Rialto';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from './redux/store';
 
 const Tabs: React.FC = () => {
     const [activeTab, setActiveTab] = useState(0);
+    const dispatch = useDispatch();
+    const domen = useSelector((state: RootState) => state.user.anal.domen);
 
     const tabs = [
         'Панель администратора',
@@ -14,7 +18,7 @@ const Tabs: React.FC = () => {
         'Фриланс биржа',
     ];
     const urls = [
-        'https://www.admin.com/',
+        domen,
         'https://www.anal.com/',
         'https://www.mail.com/',
         'https://www.easy-money.com/',
