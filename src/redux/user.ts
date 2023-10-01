@@ -109,7 +109,7 @@ const initialState: User = {
    banners: startBanners,
    anal: {
       balance: 100,
-      domen: 'https://www.asdsad3fgsa13.xh/',
+      domain: 'https://www.asdsad3fgsa13.xh/',
       hostCount: 10,
    },
    rialtos: [],
@@ -133,6 +133,12 @@ const slice = createSlice({
       updateEmailIsNew(user, action: PayloadAction<{ index: number, value: boolean }>) {
          user.emails[action.payload.index].isNew = action.payload.value;
       },
+      updateDomain(user, action: PayloadAction<string>) {
+         user.anal.domain = action.payload;
+      },
+      updateHostCount(user, action: PayloadAction<number>) {
+         user.anal.hostCount = action.payload;
+      },
       setBanner(user, action: PayloadAction<Array<Banner>>) {
          user.banners = action.payload;
       },
@@ -142,8 +148,11 @@ const slice = createSlice({
             bannerId: user.lastBannerId++,
          });
       },
-      setRialto(user, action: PayloadAction<Array<Rialto>>) {
+      setRialtos(user, action: PayloadAction<Array<Rialto>>) {
          user.rialtos = action.payload;
+      },
+      removeRialto(user, action: PayloadAction<number>) {
+         //
       },
       setBots(user, action: PayloadAction<Array<Bot>>) {
          user.bots = action.payload;
@@ -151,11 +160,11 @@ const slice = createSlice({
       setBalance(user, action: PayloadAction<number>) {
          user.anal.balance = action.payload;
       },
-      setDomen(user, action: PayloadAction<string>) {
-         user.anal.domen = action.payload;
+      setDomain(user, action: PayloadAction<string>) {
+         user.anal.domain = action.payload;
       },
    },
 });
 
 export default slice.reducer;
-export const { setActiveTab, setEmail, setBanner, addBanner, setRialto, setBots, setBalance, setDomen, updateEmailDisable, updateEmailIsNew, } = slice.actions;
+export const { setActiveTab, setEmail, setBanner, addBanner, setRialtos, removeRialto, setBots, setBalance, setDomain, updateEmailDisable, updateEmailIsNew, updateDomain, updateHostCount,  } = slice.actions;

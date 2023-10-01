@@ -37,7 +37,7 @@ function Anal() {
                 <div className="mb-4">
                     <span className="font-semibold">
                         Название домена:
-                    </span> { user.anal.domen }
+                    </span> { user.anal.domain }
                 </div>
                 <div className="mb-4">
                     <span className="font-semibold">
