@@ -1,11 +1,16 @@
 import React from 'react';
 import { Rialto as RialtoInterface } from '../scripts/types';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
 
 interface RialtoProps extends RialtoInterface {
     onAdd: Function,
 };
 
 const RialtoItem: React.FC<RialtoProps> = ({ name, about, price, onAdd, age, domain, count, work, topic, }) => {
+    const dispatch = useDispatch();
+    const balance = useSelector((state: RootState) => state.user.anal.balance);
+
     const handleAdd = () => {
         onAdd();
     };
@@ -58,12 +63,22 @@ const RialtoItem: React.FC<RialtoProps> = ({ name, about, price, onAdd, age, dom
                     { about }
                 </p>
                 <div className="flex justify-end items-center mt-auto">
-                    <button
-                        onClick={handleAdd}
-                        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300"
-                    >
-                        Заказать за { price } $
-                    </button>
+                    {
+                        balance >= price ?
+                        <button
+                            onClick={handleAdd}
+                            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300"
+                        >
+                            Заказать за { price } $
+                        </button>
+                        :
+                        <button
+                            disabled={true}
+                            className="px-4 py-2 bg-gray-500 text-white rounded cursor-not-allowed"
+                        >
+                            Заказать за { price } $
+                        </button>
+                    }
                 </div>
             </div>
         </div>

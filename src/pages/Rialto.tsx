@@ -2,11 +2,11 @@ import React, { useEffect, useState, } from 'react';
 import RialtoItem from "../components/RialtoItem";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { Rialto as RialtoInterface } from '../scripts/types';
+import { Rialto as RialtoInterface, Banner as BannerInterface, } from '../scripts/types';
 import { greetings, farewells, requests, names } from "../scripts/emailTemplates";
 import { simpleDomains, rareDomains, unicDomains, } from "../scripts/domainTemplates";
 import { newsTask, domainTask, hostingTask, designTask, } from "../scripts/rialtoTemplates";
-import { setActiveTab as setActiveTabAction, setRialtos as setRialtosAction, removeRialto as removeRialtoAction, updateDomain as updateDomainAction, updateHostCount as updateHostCountAction, } from '../redux/user';
+import { setActiveTab as setActiveTabAction, setRialtos as setRialtosAction, removeRialto as removeRialtoAction, updateDomain as updateDomainAction, updateHostCount as updateHostCountAction, setBalance as setBalanceAction, addBanner as addBannerAction, } from '../redux/user';
 
 const tasks = [...newsTask, ...domainTask, ...hostingTask, ...designTask];
 const domains = [...simpleDomains, ...rareDomains, ...unicDomains];
@@ -36,7 +36,7 @@ const generateRialtos = (): Array<RialtoInterface> => {
             price: rand(0, 100),
             age:   rand(14, 80),
             work: work,
-            domain:isDomain ? generateDomain() : '',
+            domain: isDomain ? generateDomain() : '',
             ...task,
         })
     }
@@ -46,22 +46,26 @@ const generateRialtos = (): Array<RialtoInterface> => {
 function Rialto() {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
+    const balance = user.anal.balance;
     const rialtos = user.rialtos;
     const setRialtos = (payload: Array<RialtoInterface>) => dispatch(setRialtosAction(payload));
     const setActiveTab = (payload: number) => dispatch(setActiveTabAction(payload));
     const removeRialto = (payload: number) => dispatch(removeRialtoAction(payload));
     const updateHostCount = (payload: number) => dispatch(updateHostCountAction(payload));
     const updateDomain = (payload: string) => dispatch(updateDomainAction(payload));
+    const setBalance = (payload: number) => dispatch(setBalanceAction(payload));
+    const addBanner = (payload: BannerInterface) => dispatch(addBannerAction(payload));
 
     
     const handleAddBanner = (index: number) => {
+        setBalance(balance - rialtos[index].price);
         if ('count'in rialtos[index]) {
             setActiveTab(1);
             updateHostCount(rialtos[index].count || 0);
             return;
         }
 
-        if ('domain' in rialtos[index]) {
+        if ('domain' in rialtos[index] && rialtos[index].domain) {
             setActiveTab(1);
             updateDomain(rialtos[index].domain || '');
             return;
@@ -73,9 +77,19 @@ function Rialto() {
             y: 0,
             width: 300,
             height: 300,
-            isNews: 'topic' in rialtos[index],
-            isLogo: 'src' in rialtos[index],
+            price: 0,
         };
+        if ('topic' in rialtos[index] && rialtos[index].topic) {
+            // @ts-ignore
+            banner.isNews = true;
+        }
+        
+        if ('src' in rialtos[index] && rialtos[index].src) {
+            // @ts-ignore
+            banner.isLogo = true;
+        }
+
+        console.log(333, banner);
 
         // @ts-ignore
         addBanner(banner);

@@ -34,6 +34,7 @@ function Site() {
 
     const hideDetails = () => {
         setDetailsVisibleIndex(null);
+        setEditBannerIndex(null);
     };
 
     const editBanner = (index: number | null) => {

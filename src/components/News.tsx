@@ -21,6 +21,11 @@ const News: React.FC<NewsProps> = ({
 }) => {
     const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
+    const handleClick = () => {
+        console.log(555);
+        onClick(index);
+    };
+
     return (
         <Draggable
             scale={1}
@@ -38,7 +43,7 @@ const News: React.FC<NewsProps> = ({
             >
                 <div
                     className={bannerClasses}
-                    onClick={() => onClick(index)}
+                    onClick={handleClick}
                 >
                     <div className="flex justify-between">
                         <h2 className="news__title text-black text-lg font-bold mb-3">

@@ -108,7 +108,7 @@ const initialState: User = {
    emails: [],
    banners: startBanners,
    anal: {
-      balance: 100,
+      balance: 50,
       domain: 'https://www.asdsad3fgsa13.xh/',
       hostCount: 10,
    },
