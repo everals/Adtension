@@ -7,7 +7,7 @@ import Logo from "../components/Logo";
 
 import DetailsBanner from "../components/DetailsBanner";
 import Bot from "../components/Bot";
-import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction } from '../redux/user';
+import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction, updateBannerX as updateBannerXAction, updateBannerY as updateBannerYAction, updateBannerWidth as updateBannerWidthAction, updateBannerHeight as updateBannerHeightAction } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
@@ -46,6 +46,10 @@ function Site() {
     const setBalance = (payload: number) => dispatch(setBalanceAction(payload));
     const [detailsVisibleIndex, setDetailsVisibleIndex] = useState<number | null>(null);
     const [editBannerIndex, setEditBannerIndex] = useState<number | null>(null);
+    const updateBannerX = (payload: { index: number, value: number }) => dispatch(updateBannerXAction(payload));
+    const updateBannerY = (payload: { index: number, value: number }) => dispatch(updateBannerYAction(payload));
+    const updateBannerWidth = (payload: { index: number, value: number }) => dispatch(updateBannerWidthAction(payload));
+    const updateBannerHeight = (payload: { index: number, value: number }) => dispatch(updateBannerHeightAction(payload));
 
     const deepCopy = (obj:any) =>  JSON.parse(JSON.stringify(obj)) as typeof obj;
 
@@ -147,6 +151,10 @@ function Site() {
                         onClick={showDetails}
                         isEdit={editBannerIndex === banner.bannerId}
                         index={banner.bannerId}
+                        onUpdateBannerX={value => updateBannerX({index, value})}
+                        onUpdateBannerY={value => updateBannerY({index, value})}
+                        onUpdateBannerWidth={value => updateBannerWidth({index, value})}
+                        onUpdateBannerHeight={value => updateBannerHeight({index, value})}
                     />
                 ))
             }
@@ -159,6 +167,10 @@ function Site() {
                         onClick={showDetails}
                         isEdit={editBannerIndex === link.bannerId}
                         index={link.bannerId}
+                        onUpdateBannerX={value => updateBannerX({index, value})}
+                        onUpdateBannerY={value => updateBannerY({index, value})}
+                        onUpdateBannerWidth={value => updateBannerWidth({index, value})}
+                        onUpdateBannerHeight={value => updateBannerHeight({index, value})}
                     />
                 ))
             }
@@ -171,6 +183,10 @@ function Site() {
                         onClick={showDetails}
                         isEdit={editBannerIndex === button.bannerId}
                         index={button.bannerId}
+                        onUpdateBannerX={value => updateBannerX({index, value})}
+                        onUpdateBannerY={value => updateBannerY({index, value})}
+                        onUpdateBannerWidth={value => updateBannerWidth({index, value})}
+                        onUpdateBannerHeight={value => updateBannerHeight({index, value})}
                     />
                 ))
             }
@@ -184,6 +200,10 @@ function Site() {
                         onClick={showDetails}
                         isEdit={editBannerIndex === news.bannerId}
                         index={news.bannerId}
+                        onUpdateBannerX={value => updateBannerX({index, value})}
+                        onUpdateBannerY={value => updateBannerY({index, value})}
+                        onUpdateBannerWidth={value => updateBannerWidth({index, value})}
+                        onUpdateBannerHeight={value => updateBannerHeight({index, value})}
                     />
                 ))
             }
@@ -197,6 +217,10 @@ function Site() {
                         onClick={showDetails}
                         isEdit={editBannerIndex === logo.bannerId}
                         index={logo.bannerId}
+                        onUpdateBannerX={value => updateBannerX({index, value})}
+                        onUpdateBannerY={value => updateBannerY({index, value})}
+                        onUpdateBannerWidth={value => updateBannerWidth({index, value})}
+                        onUpdateBannerHeight={value => updateBannerHeight({index, value})}
                     />
                 ))
             }

@@ -52,6 +52,7 @@ body {
     pointer-events: none;
     transition: 300ms;
     z-index: 999;
+    opacity: 0.5;
 
     &__anim {
         border-radius: 50%;
@@ -81,6 +82,7 @@ body {
 }
 
 .news {
+    cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
 
@@ -90,6 +92,7 @@ body {
 }
 
 .ad {
+    cursor: pointer;
     &-1 { font-family: 'Caveat', cursive; }
     &-2 { font-family: 'Handjet', cursive; }
     &-3 { font-family: 'Noto Sans JP', sans-serif; }
@@ -126,9 +129,30 @@ body {
 }
 
 
+.new-message {
+    animation: newMessAnim 3s infinite;
+}
 
-
-
+@keyframes newMessAnim {
+    0% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(-2deg);
+    }
+    40% {
+        transform: rotate(4deg);
+    }
+    50% {
+        transform: rotate(-4deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
 
 
 

@@ -7,6 +7,10 @@ interface ButtonProps extends ButtonInterface {
     index: number,
     onClick: Function,
     isEdit: boolean,
+    onUpdateBannerX: (val: number) => void,
+    onUpdateBannerY: (val: number) => void,
+    onUpdateBannerWidth: (val: number) => void,
+    onUpdateBannerHeight: (val: number) => void,
 }
 
 function rand (a:number, b: number): number {
@@ -25,12 +29,22 @@ const Button: React.FC<ButtonProps> = ({
     price,
     onClick,
     fontType,
+    onUpdateBannerX,
+    onUpdateBannerY,
+    onUpdateBannerWidth,
+    onUpdateBannerHeight,
 }) => {
     const [random, setRandom] = useState(rand(1, 11));
     const buttonClasses = `p-3 border text-white font-bold rounded-xl ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
 
+    const stopHandler = (_: any, ui: {x: number, y: number}) => {
+        onUpdateBannerX(ui.x);
+        onUpdateBannerY(ui.y);
+    };
+
     return (
         <Draggable
+            onStop={stopHandler}
             defaultPosition={{x, y}}
             scale={1}
             handle={isEdit ? '.handle' : '#nothing'}

@@ -6,6 +6,10 @@ interface NewsProps extends NewsInterface {
     index: number,
     onClick: Function,
     isEdit: boolean,
+    onUpdateBannerX: (val: number) => void,
+    onUpdateBannerY: (val: number) => void,
+    onUpdateBannerWidth: (val: number) => void,
+    onUpdateBannerHeight: (val: number) => void,
 }
 
 const News: React.FC<NewsProps> = ({
@@ -18,16 +22,30 @@ const News: React.FC<NewsProps> = ({
     height,
     onClick,
     isEdit,
+    onUpdateBannerX,
+    onUpdateBannerY,
+    onUpdateBannerWidth,
+    onUpdateBannerHeight,
 }) => {
     const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
+    const stopHandler = (_: any, ui: {x: number, y: number}) => {
+        onUpdateBannerX(ui.x);
+        onUpdateBannerY(ui.y);
+    };
+
+    const handleResize = (_: any, { size }: { size: { width: number, height: number }}) => {
+        onUpdateBannerWidth(size.width);
+        onUpdateBannerHeight(size.height);
+    };
+
     const handleClick = () => {
-        console.log(555);
         onClick(index);
     };
 
     return (
         <Draggable
+            onStop={stopHandler}
             scale={1}
             defaultPosition={{x, y}}
             handle={isEdit ? '.handle' : '#nothing'}
@@ -36,6 +54,7 @@ const News: React.FC<NewsProps> = ({
             }}
         >
             <ResizableBox
+                onResize={handleResize}
                 width={width}
                 height={height}
                 minConstraints={[150, 150]}

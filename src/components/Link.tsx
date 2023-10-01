@@ -7,6 +7,10 @@ interface LinkProps extends LinkInterface {
     index: number,
     onClick: Function,
     isEdit: boolean,
+    onUpdateBannerX: (val: number) => void,
+    onUpdateBannerY: (val: number) => void,
+    onUpdateBannerWidth: (val: number) => void,
+    onUpdateBannerHeight: (val: number) => void,
 }
 
 function rand (a:number, b: number): number {
@@ -25,12 +29,22 @@ const Link: React.FC<LinkProps> = ({
     price,
     onClick,
     fontType,
+    onUpdateBannerX,
+    onUpdateBannerY,
+    onUpdateBannerWidth,
+    onUpdateBannerHeight,
 }) => {
     const [random, setRandom] = useState(rand(1, 11));
     const linkClasses = `ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
 
+    const stopHandler = (_: any, ui: {x: number, y: number}) => {
+        onUpdateBannerX(ui.x);
+        onUpdateBannerY(ui.y);
+    };
+
     return (
         <Draggable
+            onStop={stopHandler}
             scale={1}
             defaultPosition={{x, y}}
             handle={isEdit ? '.handle' : '#nothing'}

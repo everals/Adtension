@@ -142,6 +142,24 @@ const slice = createSlice({
       setBanner(user, action: PayloadAction<Array<Banner>>) {
          user.banners = action.payload;
       },
+      updateBannerX(user, action: PayloadAction<{ index: number, value: number }>) {
+         user.banners[action.payload.index].x = action.payload.value;
+      },
+      updateBannerY(user, action: PayloadAction<{ index: number, value: number }>) {
+         user.banners[action.payload.index].y = action.payload.value;
+      },
+      updateBannerWidth(user, action: PayloadAction<{ index: number, value: number }>) {
+         if ('width' in user.banners[action.payload.index]) {
+            // @ts-ignore
+            user.banners[action.payload.index].width = action.payload.value;
+         }
+      },
+      updateBannerHeight(user, action: PayloadAction<{ index: number, value: number }>) {
+         if ('height' in user.banners[action.payload.index]) {
+            // @ts-ignore
+            user.banners[action.payload.index].height = action.payload.value;
+         }
+      },
       addBanner(user, action: PayloadAction<Banner>) {
          user.banners.push({
             ...action.payload,
@@ -167,4 +185,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-export const { setActiveTab, setEmail, setBanner, addBanner, setRialtos, removeRialto, setBots, setBalance, setDomain, updateEmailDisable, updateEmailIsNew, updateDomain, updateHostCount,  } = slice.actions;
+export const { setActiveTab, setEmail, setBanner, addBanner, setRialtos, removeRialto, setBots, setBalance, setDomain, updateEmailDisable, updateEmailIsNew, updateDomain, updateHostCount,  updateBannerX, updateBannerY, updateBannerWidth, updateBannerHeight, } = slice.actions;
