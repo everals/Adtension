@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using Adtension.BusinessLogic.Entities;
 using Adtension.BusinessLogic.Models.Responses.Banners;
+using Adtension.BusinessLogic.Models.Responses.Sessions;
 
 namespace Adtension.BusinessLogic.Extansions;
 
@@ -17,5 +18,13 @@ public static class ResponseExtensions
             ContentLink = banner.ContentLink,
             EffectId = banner.EffectId,
             ImageLink = banner.ImageLink
+        };
+
+    public static AnalResponse ToResponse(this Anal anal) =>
+        new AnalResponse()
+        {
+            Balance = anal.Balance,
+            Domain = anal.Domain,
+            MaxUsers = anal.MaxUsers
         };
 }
