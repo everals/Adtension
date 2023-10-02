@@ -35,12 +35,6 @@ body {
     top: 0;
 }
 
-.edit-banner {
-    & + .react-resizable-handle {
-        display: block;
-    }
-}
-
 .cursor {
     position: fixed;
     width: 20px;
@@ -160,5 +154,15 @@ body {
 }
 
 
+.mblock {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 
+    &--edit {
+        & + .react-resizable-handle {
+            display: block;
+        }
+    }
+}
 

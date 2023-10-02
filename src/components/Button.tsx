@@ -11,7 +11,6 @@ interface ButtonProps extends ButtonInterface {
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth: (val: number) => void;
     onUpdateBannerHeight: (val: number) => void;
-    isEdit: boolean;
 }
 
 function rand (a:number, b: number): number {
@@ -30,10 +29,10 @@ const Button: React.FC<ButtonProps> = ({
     fontType,
     onUpdateBannerX,
     onUpdateBannerY,
-    isEdit,
 }) => {
+    const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
-    const buttonClasses = `p-3 border text-white font-bold rounded-xl ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
+    const buttonClasses = `p-3 border text-white font-bold rounded-xl ad ad-${ fontType || random } ${ isEdit ? 'border-dashed border-2' : '' }`;
 
     return (
         <MovableBlock
@@ -41,11 +40,14 @@ const Button: React.FC<ButtonProps> = ({
             onUpdateBannerY={onUpdateBannerY}
             x={x}
             y={y}
+            isEdit={isEdit}
         >
             <div
                 style={{ background: color, }}
                 className={buttonClasses}
                 data-price={price}
+                onDoubleClick={() => setIsEdit(!isEdit)}
+                onClick={() => setIsEdit(false)}
             >
                 {
                     isEdit ?

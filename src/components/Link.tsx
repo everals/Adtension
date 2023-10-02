@@ -7,7 +7,6 @@ import MovableBlock from '../components/MovableBlock';
 
 interface LinkProps extends LinkInterface {
     index: number,
-    isEdit: boolean,
     onUpdateBannerX: (val: number) => void,
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
@@ -30,21 +29,24 @@ const Link: React.FC<LinkProps> = ({
     fontType,
     onUpdateBannerX,
     onUpdateBannerY,
-    isEdit,
 }) => {
+    const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
-    const linkClasses = `ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
+    const linkClasses = `ad ad-${ fontType || random } ${ isEdit ? 'border-dashed border-2' : 'border-solid' }`;
     return (
         <MovableBlock
             onUpdateBannerX={onUpdateBannerX}
             onUpdateBannerY={onUpdateBannerY}
             x={x}
             y={y}
+            isEdit={isEdit}
         >
             <div
                 className={linkClasses}
                 style={{color: color}}
                 data-price={price}
+                onDoubleClick={() => setIsEdit(!isEdit)}
+                onClick={() => setIsEdit(false)}
             >
                 {
                     isEdit ?

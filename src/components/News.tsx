@@ -11,7 +11,6 @@ interface NewsProps extends NewsInterface {
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
     onUpdateBannerHeight: (val: number) => void,
-    isEdit: boolean,
 }
 
 const News: React.FC<NewsProps> = ({
@@ -26,9 +25,9 @@ const News: React.FC<NewsProps> = ({
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
-    isEdit,
 }) => {
-    const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
+    const [ isEdit, setIsEdit ] = useState(false);
+    const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'border-dashed border-2' : 'border-solid' }`;
 
     return (
         <MovableBlock
@@ -41,8 +40,13 @@ const News: React.FC<NewsProps> = ({
             onUpdateBannerWidth={onUpdateBannerWidth}
             onUpdateBannerHeight={onUpdateBannerHeight}
             resizeble
+            isEdit={isEdit}
         >
-            <div className={bannerClasses}>
+            <div
+                className={bannerClasses}
+                onDoubleClick={() => setIsEdit(!isEdit)}
+                onClick={() => setIsEdit(false)}
+            >
                 <div className="flex justify-between">
                     <h2 className="news__title text-black text-lg font-bold mb-3">
                         { title }

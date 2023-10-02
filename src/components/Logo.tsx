@@ -10,7 +10,6 @@ interface LogoProps extends LogoInterface {
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
     onUpdateBannerHeight: (val: number) => void,
-    isEdit: boolean,
 }
 
 const Logo: React.FC<LogoProps> = ({
@@ -24,9 +23,9 @@ const Logo: React.FC<LogoProps> = ({
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
-    isEdit,
 }) => {
-    const bannerClasses = `relative h-full ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
+    const [ isEdit, setIsEdit ] = useState(false);
+    const bannerClasses = `relative h-full ${ isEdit ? 'border-dashed border-2' : '' }`;
 
     return (
         <MovableBlock
@@ -38,9 +37,14 @@ const Logo: React.FC<LogoProps> = ({
             onUpdateBannerY={onUpdateBannerY}
             onUpdateBannerWidth={onUpdateBannerWidth}
             onUpdateBannerHeight={onUpdateBannerHeight}
+            isEdit={isEdit}
             resizeble
         >
-            <div className={bannerClasses}>
+            <div
+                className={bannerClasses}
+                onDoubleClick={() => setIsEdit(!isEdit)}
+                onClick={() => setIsEdit(false)}
+            >
                 {
                     isEdit ?
                     <>
@@ -58,6 +62,7 @@ const Logo: React.FC<LogoProps> = ({
                 <img
                     className="h-full w-full"
                     src={src}
+                    draggable={false}
                 />
             </div>
         </MovableBlock>

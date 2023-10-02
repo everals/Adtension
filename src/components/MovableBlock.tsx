@@ -22,6 +22,8 @@ interface MovableBlockProps {
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth?: (val: number) => void;
     onUpdateBannerHeight?: (val: number) => void;
+
+    isEdit: boolean,
 }
 
 function isVerticalOverlap({y: y1, height: height1}: { y: number, height: number }, {y: y2, height: height2 }: { y: number, height: number }) {
@@ -47,8 +49,8 @@ const Banner: React.FC<MovableBlockProps> = ({
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
+    isEdit,
 }) => {
-    const [ isEdit, setIsEdit ] = useState(false);
     const blockRef = createRef();
     const [ bounds, setBounds ] = useState({
         top: 0,
@@ -105,6 +107,7 @@ const Banner: React.FC<MovableBlockProps> = ({
         }
         onUpdateBannerWidth(size.width);
         onUpdateBannerHeight(size.height);
+        
     };
 
     return (
@@ -126,30 +129,18 @@ const Banner: React.FC<MovableBlockProps> = ({
                     maxConstraints={[400, 250]}
                 >
                     <div
-                        className="mblock h-full"
+                        className={`mblock h-full ${ isEdit ? 'mblock--edit' : '' }`}
                         ref={blockRef as React.RefObject<HTMLDivElement>}
-                        onDoubleClick={() => setIsEdit(!isEdit)}
-                        onClick={() => setIsEdit(false)}
                     >
-                        {
-                            React.cloneElement(children, {
-                                isEdit: isEdit,
-                            })
-                        }
+                        { children }
                     </div>
                 </ResizableBox>
                 :
                 <div
-                    className="mblock"
+                    className={`mblock ${ isEdit ? 'mblock--edit' : '' }`}
                     ref={blockRef as React.RefObject<HTMLDivElement>}
-                    onDoubleClick={() => setIsEdit(!isEdit)}
-                    onClick={() => setIsEdit(false)}
                 >
-                    {
-                        React.cloneElement(children, {
-                            isEdit: isEdit,
-                        })
-                    }
+                    { children  }
                 </div>
             }
         </Draggable>

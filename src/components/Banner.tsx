@@ -11,7 +11,6 @@ interface BannerProps extends BannerInterface {
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
     onUpdateBannerHeight: (val: number) => void,
-    isEdit: boolean,
 }
 
 function rand (a:number, b: number): number {
@@ -33,10 +32,10 @@ const Banner: React.FC<BannerProps> = ({
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
-    isEdit,
 }) => {
+    const [ isEdit, setIsEdit ] = useState(false);
     const [ random, setRandom ] = useState(rand(1, 11));
-    const bannerClasses = `p-4 border border-black rounded-xl h-full ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
+    const bannerClasses = `p-4 border border-black rounded-xl h-full ad ad-${ fontType || random } ${ isEdit ? 'border-dashed border-2' : 'border-solid' }`;
 
     return (
         <MovableBlock
@@ -49,6 +48,7 @@ const Banner: React.FC<BannerProps> = ({
             onUpdateBannerWidth={onUpdateBannerWidth}
             onUpdateBannerHeight={onUpdateBannerHeight}
             resizeble
+            isEdit={isEdit}
         >
             <div
                 className={bannerClasses}
@@ -56,6 +56,8 @@ const Banner: React.FC<BannerProps> = ({
                     background: color,
                 }}
                 data-price={price}
+                onDoubleClick={() => setIsEdit(!isEdit)}
+                onClick={() => setIsEdit(false)}
             >
                 <div className="flex justify-between">
                     <h2 className="text-white text-lg font-semibold">
