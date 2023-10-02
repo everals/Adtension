@@ -65,7 +65,7 @@ function Email() {
             value: true,
         }));
 
-        if (email.price > 0) {
+        if (email.price > 100) {
             chagneBalance(rand(-10, -1));
             setActiveTab(1);
             return;
