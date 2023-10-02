@@ -14,5 +14,18 @@ const store = configureStore({
    ],
 });
 
+export const getIncome = (state: RootState) => {
+   let sum = 0;
+   let count = 0;
+   state.user.banners.forEach((ban) => {
+      if ('price' in ban) {
+         sum += ban.price;
+         count++;
+      }
+   }, 0);
+
+   return +(sum / count).toFixed(2);
+};
+
 export default store;
 

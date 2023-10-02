@@ -83,6 +83,7 @@ export interface Anal {
     domain: string;
     hostCount: number,
     reputation: number,
+    incomeHistory: Array<number>,
 };
 
 export interface Rialto {

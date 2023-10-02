@@ -3,13 +3,14 @@ import Tabs from './Tabs';
 import { generateEmail } from './scripts/emailGenerate';
 import { Email } from './scripts/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { addEmail as addEmailAction, chagneBalance as chagneBalanceAction } from './redux/user';
-import { RootState } from './redux/store';
+import { addEmail as addEmailAction, chagneBalance as chagneBalanceAction, addIncomeHistory as addIncomeHistoryAction, } from './redux/user';
+import { RootState, getIncome, } from './redux/store';
 
 function App() {
     const dispatch = useDispatch();
     const addEmail = (payload: Email) => dispatch(addEmailAction(payload));
     const chagneBalance = (payload: number) => dispatch(chagneBalanceAction(payload));
+    const income = useSelector(getIncome);
     
     useEffect(() => {
         const emailInterval = setInterval(() => {
@@ -20,8 +21,13 @@ function App() {
             }
         }, 60000);
 
+        const incomeInterval = setInterval(() => {
+            dispatch(addIncomeHistoryAction(income));
+        }, 60000);
+
         return () => {
             clearInterval(emailInterval);
+            clearInterval(incomeInterval);
         }
     }, []);
 

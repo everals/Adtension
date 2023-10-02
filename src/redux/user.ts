@@ -108,6 +108,7 @@ const initialState: User = {
    emails: [],
    banners: startBanners,
    anal: {
+      incomeHistory: [12, 10, 3, 1, 1, 4, 2.8, 3.3, 1, 0, 2.1, 0, 3.1 ],
       balance: 50,
       reputation: 50,
       domain: 'https://www.asdsad3fgsa13.xh/',
@@ -122,6 +123,12 @@ const slice = createSlice({
    initialState,
 
    reducers: {
+      addIncomeHistory(user, action: PayloadAction<number>) {
+         user.anal.incomeHistory.push(action.payload);
+         if (user.anal.incomeHistory.length > 14) {
+            user.anal.incomeHistory = user.anal.incomeHistory.slice(1);
+         }
+      },
       setActiveTab(user, action: PayloadAction<number>) {
          user.activeTab = action.payload;
       },
@@ -196,6 +203,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 export const {
+   addIncomeHistory,
    setActiveTab,
    setEmail,
    addEmail,

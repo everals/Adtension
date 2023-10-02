@@ -1,31 +1,54 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../redux/store';
+import { RootState, getIncome } from '../redux/store';
+import ReactApexChart from 'react-apexcharts';
 import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
+
+
+const options = {
+    chart: {
+        toolbar: {
+            show: false,
+        },
+        zoom: {
+            enabled: false,
+        }
+    },
+    colors: ['rgb(54, 124, 213)'],
+    yaxis: {
+        labels: {
+            formatter: (val: number) => val === 0 ? '' : `${ val } $`,
+        },
+    },
+    xaxis: {
+        labels: {
+            show: false,
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    tooltip: {
+        enabled: false,
+    },
+};
+
 
 function Anal() {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
     const bots = user.bots;
     const banners = user.banners;
+    const income = useSelector(getIncome);
 
-    const getIncome = () => {
-        let sum = 0;
-        let count = 0;
-        banners.forEach((ban) => {
-            if ("price" in ban) {
-                sum += ban.price;
-                count++;
-            }
-        }, 0);
-
-        return (sum / count).toFixed(2);
-    };
-    const income = getIncome();
+    const series = [{
+        name: 'Средний доход с рекламы',
+        data: user.anal.incomeHistory,
+    }];
 
     return (
-        <div className="tab px-12 mt-8">
-            <div className="p-4">
+        <div className="tab px-12 mt-8 flex flex-wrap">
+            <div className="w-4/12 p-4">
                 <div className="text-xl font-semibold mb-6">
                     Аналитика сайта
                 </div>
@@ -79,6 +102,16 @@ function Anal() {
                         Количество ссылок:
                     </span> { banners.filter((link): link is LinkInterface => "isLink" in link).length }
                 </div>
+            </div>
+            <div className="w-6/12 p-4">
+                <div className="text-xl font-semibold mb-6">
+                    Средний доход с рекламы
+                </div>
+                <ReactApexChart
+                    options={options}
+                    series={series}
+                    type='bar'
+                />
             </div>
         </div>
     );
