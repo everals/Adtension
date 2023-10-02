@@ -71,8 +71,8 @@ export interface Button {
     isSet: boolean;
 };
 
-export interface Logo {
-    isLogo: true;
+export interface Image {
+    isImage: true;
     bannerId: number;
     src: string;
     x: number;
@@ -112,5 +112,5 @@ export interface Bot {
     isClick: boolean;
 };
 
-export type AllTypesOfBlocks = Banner | Button | Link | Logo | News;
-export type GroupAllTypesOfBlocks = Banner & Button & Link & Logo & News;
+export type AllTypesOfBlocks = Banner | Button | Link | Image | News;
+export type GroupAllTypesOfBlocks = Banner & Button & Link & Image & News;

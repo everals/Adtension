@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
-import { Logo as LogoInterface } from '../scripts/types';
-import Info from '../components/Info';
-import MovableBlock from '../components/MovableBlock';
-interface LogoProps extends LogoInterface {
+import { Image as ImageInterface } from '../scripts/types';
+import Info from './Info';
+import MovableBlock from './MovableBlock';
+interface ImageProps extends ImageInterface {
     id: number;
     onUpdateBannerX: (val: number) => void;
     onUpdateBannerY: (val: number) => void;
@@ -13,7 +13,7 @@ interface LogoProps extends LogoInterface {
     onUpdateBannerSet: (val: boolean) => void;
 }
 
-const Logo: React.FC<LogoProps> = ({
+const Image: React.FC<ImageProps> = ({
     id,
     x,
     y,
@@ -65,9 +65,9 @@ const Logo: React.FC<LogoProps> = ({
                     :
                     null
                 }
-                <img
-                    className="h-full w-full"
-                    src={src}
+                <div
+                    className="image h-full w-full"
+                    style={{backgroundImage: `url(./assets/images/${src})`}}
                     draggable={false}
                 />
             </div>
@@ -75,4 +75,4 @@ const Logo: React.FC<LogoProps> = ({
     );
 };
 
-export default Logo;
+export default Image;

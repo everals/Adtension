@@ -5,10 +5,10 @@ import { RootState } from '../redux/store';
 import { Rialto as RialtoInterface, Banner as BannerInterface, } from '../scripts/types';
 import { greetings, farewells, requests, names } from "../scripts/emailTemplates";
 import { simpleDomains, rareDomains, unicDomains, } from "../scripts/domainTemplates";
-import { newsTask, domainTask, hostingTask, designTask, } from "../scripts/rialtoTemplates";
+import { newsTask, domainTask, hostingTask, designTask, imageTasks, videoTasks, smmTasks, } from "../scripts/rialtoTemplates";
 import { setActiveTab as setActiveTabAction, setRialtos as setRialtosAction, removeRialto as removeRialtoAction, updateDomain as updateDomainAction, updateHostCount as updateHostCountAction, setBalance as setBalanceAction, addBanner as addBannerAction, } from '../redux/user';
 
-const tasks = [...newsTask, ...domainTask, ...hostingTask, ...designTask];
+const tasks = [...newsTask, ...domainTask, ...hostingTask, ...designTask, ...imageTasks, ...videoTasks, ...smmTasks, ];
 const domains = [...simpleDomains, ...rareDomains, ...unicDomains];
 
 function rand(a: number, b: number): number {
@@ -28,8 +28,18 @@ const generateRialtos = (): Array<RialtoInterface> => {
     for (let i = 0; i < 8; i++) {
         const task = tasks[Math.floor(Math.random() * tasks.length)];
         const isDomain = domainTask.includes(task);
+        const isDesigner = designTask.some(t => t === task);
+        const isVideo = videoTasks.some(t => t === task);
+        const isSmm = smmTasks.some(t => t === task);
+        const isCopywiter = 'topic' in task;
         const name = generatenName();
-        const work = 'src' in task ? 'Дизайнер' : 'topic' in task ? 'Копирайтер' : isDomain ? 'SEO-разработчик'  : 'WEB-программист';
+        const work =
+            isDesigner ? 'Дизайнер'
+            : isVideo ? 'Видео монтажер'
+            : isSmm ? 'SMM-мастер'
+            : isCopywiter ? 'Копирайтер'
+            : isDomain ? 'SEO-разработчик' 
+            : 'WEB-программист';
 
         rialtos.push({
             name: name,
@@ -87,10 +97,8 @@ function Rialto() {
         
         if ('src' in rialtos[index] && rialtos[index].src) {
             // @ts-ignore
-            banner.isLogo = true;
+            banner.isImage = true;
         }
-
-        console.log(333, banner);
 
         // @ts-ignore
         addBanner(banner);

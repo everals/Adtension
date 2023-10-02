@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, getIncome } from '../redux/store';
 import ReactApexChart from 'react-apexcharts';
-import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
+import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Image as ImageInterface,  News as NewsInterface, } from '../scripts/types';
 
 
 const options = {
@@ -91,11 +91,6 @@ function Anal() {
                     <span className="font-semibold">
                         Количество кнопок:
                     </span> { banners.filter((button): button is ButtonInterface => "isButton" in button).length }
-                </div>
-                <div className="mb-4">
-                    <span className="font-semibold">
-                        Количество логотипов:
-                    </span> { banners.filter((logo): logo is LogoInterface => "isLogo" in logo).length }
                 </div>
                 <div className="mb-4">
                     <span className="font-semibold">

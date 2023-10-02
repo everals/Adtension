@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { Email, Banner, Anal, Rialto, Bot, Button, News, Logo, Link, AllTypesOfBlocks, } from '../scripts/types';
+import { Email, Banner, Anal, Rialto, Bot, Button, News, Image, Link, AllTypesOfBlocks, } from '../scripts/types';
 
 interface User {
    lastBannerId: number,
@@ -59,14 +59,14 @@ const startBanners: Array<AllTypesOfBlocks> = [
       isSet: true,
    },
    {
-      isLogo: true,
+      isImage: true,
       bannerId: 3,
       color: '#36a1d5',
-      x: 10,
-      y: 10,
-      width: 180,
-      height: 90,
-      src: 'https://cdn.logo.com/hotlink-ok/logo-social.png',
+      x: 60,
+      y: 40,
+      width: 200,
+      height: 60,
+      src: 'logo4.png',
       isSet: true,
    },
    {
@@ -84,11 +84,11 @@ const startBanners: Array<AllTypesOfBlocks> = [
    {
       isNews: true,
       bannerId: 5,
-      x: 460,
+      x: 420,
       y: 40,
       title: 'Научные исследования доказали: Коты владеют космическими способностями!',
       text: 'Сенсационные открытия пришли из мира науки, и они безусловно удивят всех фанатов котиков. Недавно проведенные исследования, финансируемые Секретным Объединением Любителей Котов, обнаружили, что наши милые пушистые друзья обладают невероятными космическими способностями.',
-      width: 410,
+      width: 510,
       height: 320,
       price: 0,
       owner: 'Илья Мелихов',
@@ -97,11 +97,11 @@ const startBanners: Array<AllTypesOfBlocks> = [
    {
       isNews: true,
       bannerId: 6,
-      x: 460,
+      x: 420,
       y: 400,
       title: 'Мировая катастрофа: Кофе перестал давать энергию! Виноваты кофейные зёрна-вампиры?',
       text: 'Волнение охватило всю планету, когда вчера утром миллионы людей обнаружили, что их утренний ритуал с чашкой кофе больше не приносит им необходимой энергии. Что произошло? Ученые ищут ответы, и одна теория выглядит настолько сумасшедшей, что кажется, будто она вырвалась из фантастического фильма.',
-      width: 410,
+      width: 510,
       height: 340,
       price: 0,
       owner: 'Илья Мелихов',

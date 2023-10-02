@@ -3,14 +3,14 @@ import Banner from "../components/Banner";
 import Link from "../components/Link";
 import Button from "../components/Button";
 import News from "../components/News";
-import Logo from "../components/Logo";
+import Images from "../components/Image";
 
 import DetailsBanner from "../components/DetailsBanner";
 import Bot from "../components/Bot";
 import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction, updateBannerX as updateBannerXAction, updateBannerY as updateBannerYAction, updateBannerWidth as updateBannerWidthAction, updateBannerHeight as updateBannerHeightAction, setReputation as setReputationAction, updateBannerSet as updateBannerSetAction, } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
-import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
+import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Image as ImageInterface,  News as NewsInterface, } from '../scripts/types';
 
 let id = 0;
 
@@ -216,16 +216,16 @@ function Site() {
 
 
             {
-                banners.filter((logo): logo is LogoInterface => "isLogo" in logo).map((logo, index) => (
-                    <Logo
-                        key={logo.bannerId}
-                        {...logo}
-                        id={logo.bannerId}
-                        onUpdateBannerX={value => updateBannerX({index: logo.bannerId, value})}
-                        onUpdateBannerY={value => updateBannerY({index: logo.bannerId, value})}
-                        onUpdateBannerWidth={value => updateBannerWidth({index: logo.bannerId, value})}
-                        onUpdateBannerHeight={value => updateBannerHeight({index: logo.bannerId, value})}
-                        onUpdateBannerSet={value => updateBannerSet({index: logo.bannerId, value})}
+                banners.filter((image): image is ImageInterface => "isImage" in image).map((image, index) => (
+                    <Images
+                        key={image.bannerId}
+                        {...image}
+                        id={image.bannerId}
+                        onUpdateBannerX={value => updateBannerX({index: image.bannerId, value})}
+                        onUpdateBannerY={value => updateBannerY({index: image.bannerId, value})}
+                        onUpdateBannerWidth={value => updateBannerWidth({index: image.bannerId, value})}
+                        onUpdateBannerHeight={value => updateBannerHeight({index: image.bannerId, value})}
+                        onUpdateBannerSet={value => updateBannerSet({index: image.bannerId, value})}
                     />
                 ))
             }
