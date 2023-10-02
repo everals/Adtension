@@ -24,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({
     x,
     y,
     src,
-    text,
+    title,
     owner,
     price,
     fontType,
@@ -69,7 +69,7 @@ const Button: React.FC<ButtonProps> = ({
                     :
                     null
                 }
-                { text }
+                { title }
             </div>
         </MovableBlock>
     );

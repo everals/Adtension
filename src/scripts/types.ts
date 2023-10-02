@@ -8,7 +8,7 @@ export interface Email {
     isNew: boolean;
     isDisable: boolean,
     isBab: boolean,
-    type: number, // 0 - уведомление, 1 - добавление баннера, 2 - добавление кнопки, 3 - добавление ссылки
+    type: number, // 0 - уведомление, 1 - добавление баннера, 2 - добавление кнопки, 3 - добавление ссылки, 4 - спам,
 };
 
 export interface Banner {
@@ -51,7 +51,7 @@ export interface Link {
     color: string;
     x: number;
     y: number;
-    text: string;
+    title: string;
     isBad?: boolean;
     fontType?: number;
     isSet: boolean;
@@ -66,7 +66,7 @@ export interface Button {
     color: string;
     x: number;
     y: number;
-    text: string;
+    title: string;
     isBad?: boolean;
     fontType?: number;
     isSet: boolean;

@@ -65,14 +65,14 @@ const EmailItem: React.FC<EmailItemProps> = ({ name, time, messageText, price, i
                             className="px-4 py-2 bg-gray-500 text-white rounded cursor-not-allowed"
                             disabled={true}
                         >
-                            Eже добавлено
+                            { price > 100 ? 'Кажется вас надули...' : 'Eже добавлено' }
                         </button>
                         :
                         <button
                             onClick={handleAdd}
                             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300"
                         >
-                            Разместить
+                            { price > 100 ? 'Забрать приз' : 'Разместить' }
                         </button>
                     }
                 </div>

@@ -24,7 +24,7 @@ const Link: React.FC<LinkProps> = ({
     x,
     y,
     src,
-    text,
+    title,
     owner,
     price,
     fontType,
@@ -68,7 +68,7 @@ const Link: React.FC<LinkProps> = ({
                     :
                     null
                 }
-                { text }
+                { title }
             </div>
         </MovableBlock>
     );

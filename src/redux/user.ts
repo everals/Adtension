@@ -55,7 +55,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
       src: 'dooble-market.com',
       x: 130,
       y: 360,
-      text: 'Купить матрас онлайн!',
+      title: 'Купить матрас онлайн!',
       fontType: 2,
       isSet: true,
    },
@@ -78,7 +78,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
       src: 'vse-shop.pro',
       x: 1005,
       y: 300,
-      text: 'Нужны майки? Кликай!',
+      title: 'Нужны майки? Кликай!',
       fontType: 8,
       isSet: true,
    },
@@ -185,7 +185,7 @@ const slice = createSlice({
          if (!banner) return;
          if ('height' in banner) {
             // @ts-ignore
-            user.banners[action.payload.index].height = action.payload.value;
+            banner.height = action.payload.value;
          }
       },
       updateBannerSet(user, action: PayloadAction<{ index: number, value: boolean }>) {

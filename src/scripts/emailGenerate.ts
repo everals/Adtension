@@ -1,5 +1,5 @@
 import { Email as EmailInterface, Banner as BannerInterface, Anal, Rialto, Bot, } from './types';
-import { greetings, farewells, requests, names, badEmails, } from "./emailTemplates";
+import { greetings, farewells, requests, names, badEmails, spamEmails, } from "./emailTemplates";
 import { bannerList, badBannerList, } from "./bannerTemplates";
 
 export function rand(a: number, b: number): number {
@@ -13,6 +13,10 @@ export const generateName = () => {
 
 export const generateBadEmailText = () => {
     return badEmails[Math.floor(Math.random() * badEmails.length)];
+};
+
+export const generateSpamEmailText = () => {
+    return spamEmails[Math.floor(Math.random() * spamEmails.length)];
 };
 
 const banners = [...bannerList, ...badBannerList];
@@ -73,6 +77,23 @@ export const generateBadEmail = (): EmailInterface => {
     }
 };
 
+export const generateSpamEmail = () => {
+    const email = generateSpamEmailText();
+    const sum = rand(100, 10000);
+    return {
+        name: email.name,
+        time: getCurrentTime(),
+        messageText: email.text.replace(/SUM/g, sum.toString()),
+        text: '',
+        title: '',
+        price: sum,
+        isNew: true,
+        isBab: true,
+        isDisable: false,
+        type: 4,
+    }
+};
+
 export const generateWorkEmail = (): EmailInterface => {
     const banner = banners[Math.floor(Math.random() * banners.length)];
     const type = rand(1,3);
@@ -93,9 +114,11 @@ export const generateWorkEmail = (): EmailInterface => {
 };
 
 export const generateEmail = (): EmailInterface => {
+    if (rand(1, 30) === 1) {
+        return generateSpamEmail()
+    } 
     if (rand(1, 20) === 1) {
         return generateBadEmail()
-    } else {
-        return generateWorkEmail()
-    }
+    } 
+    return generateWorkEmail()
 };

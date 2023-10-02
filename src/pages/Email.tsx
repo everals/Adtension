@@ -3,7 +3,7 @@ import EmailItem from "../components/EmailItem";
 import { greetings, farewells, requests, names } from "../scripts/emailTemplates";
 import { bannerList, badBannerList } from "../scripts/bannerTemplates";
 import { Email as EmailInterface, Banner as BannerInterface, Anal, Rialto, Bot, AllTypesOfBlocks, } from '../scripts/types';
-import { setActiveTab as setActiveTabAction, setEmail as setEmailAction, addBanner as addBannerAction, updateEmailDisable, updateEmailIsNew, removeEmail as removeEmailAction, } from '../redux/user';
+import { setActiveTab as setActiveTabAction, setEmail as setEmailAction, addBanner as addBannerAction, updateEmailDisable, updateEmailIsNew, removeEmail as removeEmailAction, chagneBalance as chagneBalanceAction, } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 
@@ -20,6 +20,7 @@ function Email() {
     const addBanner = (payload: AllTypesOfBlocks) => dispatch(addBannerAction(payload));
     const removeEmail = (payload: number) => dispatch(removeEmailAction(payload));
     const setActiveTab = (payload: number) => dispatch(setActiveTabAction(payload));
+    const chagneBalance = (payload: number) => dispatch(chagneBalanceAction(payload));
 
     const handleClick = (index: number) => {
         setOpenEmail(openEmail === index ? null : index)
@@ -58,6 +59,18 @@ function Email() {
 
     const handleAddBanner = (index: number) => {
         const email = emails[emails.length - 1 - index];
+
+        dispatch(updateEmailDisable({
+            index: emails.length - 1 - index,
+            value: true,
+        }));
+
+        if (email.price > 0) {
+            chagneBalance(rand(-10, -1));
+            setActiveTab(1);
+            return;
+        }
+
         addBanner({
             ...email,
             // @ts-ignore
@@ -72,10 +85,6 @@ function Email() {
             isSet: false,
         });
 
-        dispatch(updateEmailDisable({
-            index: emails.length - 1 - index,
-            value: true,
-        }));
         setActiveTab(0);
     };
 
