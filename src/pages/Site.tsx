@@ -158,7 +158,7 @@ function Site() {
                     <Banner
                         key={banner.bannerId}
                         {...banner}
-                        index={banner.bannerId}
+                        id={banner.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: banner.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: banner.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: banner.bannerId, value})}
@@ -173,7 +173,7 @@ function Site() {
                     <Link
                         key={link.bannerId}
                         {...link}
-                        index={link.bannerId}
+                        id={link.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: link.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: link.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: link.bannerId, value})}
@@ -188,7 +188,7 @@ function Site() {
                     <Button
                         key={button.bannerId}
                         {...button}
-                        index={button.bannerId}
+                        id={button.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: button.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: button.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: button.bannerId, value})}
@@ -204,7 +204,7 @@ function Site() {
                     <News
                         key={news.bannerId}
                         {...news}
-                        index={news.bannerId}
+                        id={news.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: news.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: news.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: news.bannerId, value})}
@@ -220,7 +220,7 @@ function Site() {
                     <Logo
                         key={logo.bannerId}
                         {...logo}
-                        index={logo.bannerId}
+                        id={logo.bannerId}
                         onUpdateBannerX={value => updateBannerX({index: logo.bannerId, value})}
                         onUpdateBannerY={value => updateBannerY({index: logo.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: logo.bannerId, value})}

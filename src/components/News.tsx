@@ -6,7 +6,7 @@ import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 
 interface NewsProps extends NewsInterface {
-    index: number;
+    id: number;
     onUpdateBannerX: (val: number) => void;
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth: (val: number) => void;
@@ -15,7 +15,7 @@ interface NewsProps extends NewsInterface {
 }
 
 const News: React.FC<NewsProps> = ({
-    index,
+    id,
     x,
     y,
     title,
@@ -62,6 +62,7 @@ const News: React.FC<NewsProps> = ({
                             <Info
                                 income={0}
                                 reputation={0.5}
+                                id={id}
                             />
                             <div
                                 className={`handle`}

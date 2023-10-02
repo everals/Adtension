@@ -3,7 +3,7 @@ import EmailItem from "../components/EmailItem";
 import { greetings, farewells, requests, names } from "../scripts/emailTemplates";
 import { bannerList, badBannerList } from "../scripts/bannerTemplates";
 import { Email as EmailInterface, Banner as BannerInterface, Anal, Rialto, Bot, } from '../scripts/types';
-import { setActiveTab as setActiveTabAction, setEmail as setEmailAction, addBanner as addBannerAction, updateEmailDisable, updateEmailIsNew, } from '../redux/user';
+import { setActiveTab as setActiveTabAction, setEmail as setEmailAction, addBanner as addBannerAction, updateEmailDisable, updateEmailIsNew, removeEmail as removeEmailAction } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 
@@ -18,6 +18,7 @@ function Email() {
     const setEmails = (payload: Array<EmailInterface>) => dispatch(setEmailAction(payload));
     const [openEmail , setOpenEmail] = useState<null | number>(null);
     const addBanner = (payload: BannerInterface) => dispatch(addBannerAction(payload));
+    const removeEmail = (payload: number) => dispatch(removeEmailAction(payload));
     const setActiveTab = (payload: number) => dispatch(setActiveTabAction(payload));
 
     const handleClick = (index: number) => {
@@ -49,6 +50,10 @@ function Email() {
             default:
                 return `rgb(213, 54, 54)`;
         }
+    };
+
+    const handleRemoveEmail = (index: number) => {
+        removeEmail(emails.length - 1 - index);
     };
 
     const handleAddBanner = (index: number) => {
@@ -90,6 +95,7 @@ function Email() {
                             isOpen={openEmail === index}
                             onClick={() => handleClick(index)}
                             onAdd={() => handleAddBanner(index)}
+                            onRemove={() => handleRemoveEmail(index)}
                         />
                     ))
                 }

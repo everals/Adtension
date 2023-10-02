@@ -6,7 +6,7 @@ import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 
 interface ButtonProps extends ButtonInterface {
-    index: number;
+    id: number;
     onUpdateBannerX: (val: number) => void;
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth: (val: number) => void;
@@ -19,7 +19,7 @@ function rand (a:number, b: number): number {
 }
 
 const Button: React.FC<ButtonProps> = ({
-    index,
+    id,
     color,
     x,
     y,
@@ -63,6 +63,7 @@ const Button: React.FC<ButtonProps> = ({
                         <Info
                             income={price}
                             reputation={-1}
+                            id={id}
                         />
                     </>
                     :

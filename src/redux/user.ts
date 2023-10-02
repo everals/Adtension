@@ -161,31 +161,47 @@ const slice = createSlice({
          user.banners = action.payload;
       },
       updateBannerX(user, action: PayloadAction<{ index: number, value: number }>) {
-         user.banners[action.payload.index].x = action.payload.value;
+         const banner = user.banners.find(ban => ban.bannerId === action.payload.index);
+         if (!banner) return;
+         banner.x = action.payload.value;
       },
       updateBannerY(user, action: PayloadAction<{ index: number, value: number }>) {
-         user.banners[action.payload.index].y = action.payload.value;
+         const banner = user.banners.find(ban => ban.bannerId === action.payload.index);
+         if (!banner) return;
+         banner.y = action.payload.value;
       },
       updateBannerWidth(user, action: PayloadAction<{ index: number, value: number }>) {
-         if ('width' in user.banners[action.payload.index]) {
+         const banner = user.banners.find(ban => ban.bannerId === action.payload.index);
+         if (!banner) return;
+         if ('width' in banner) {
             // @ts-ignore
-            user.banners[action.payload.index].width = action.payload.value;
+            banner.width = action.payload.value;
          }
       },
       updateBannerHeight(user, action: PayloadAction<{ index: number, value: number }>) {
-         if ('height' in user.banners[action.payload.index]) {
+         const banner = user.banners.find(ban => ban.bannerId === action.payload.index);
+         if (!banner) return;
+         if ('height' in banner) {
             // @ts-ignore
             user.banners[action.payload.index].height = action.payload.value;
          }
       },
       updateBannerSet(user, action: PayloadAction<{ index: number, value: boolean }>) {
-         user.banners[action.payload.index].isSet = action.payload.value;
+         const banner = user.banners.find(ban => ban.bannerId === action.payload.index);
+         if (!banner) return;
+         banner.isSet = action.payload.value;
       },
       addBanner(user, action: PayloadAction<Banner>) {
          user.banners.push({
             ...action.payload,
             bannerId: user.lastBannerId++,
          });
+      },
+      removeBanner(user, action: PayloadAction<number>) {
+         user.banners = user.banners.filter(ban => ban.bannerId !== action.payload);
+      },
+      removeEmail(user, action: PayloadAction<number>) {
+         user.emails = [...user.emails .slice(0, action.payload), ...user.emails .slice(action.payload + 1)]
       },
       setRialtos(user, action: PayloadAction<Array<Rialto>>) {
          user.rialtos = action.payload;
@@ -219,6 +235,8 @@ export const {
    addEmail,
    setBanner,
    addBanner,
+   removeBanner,
+   removeEmail,
    setRialtos,
    removeRialto,
    setBots,

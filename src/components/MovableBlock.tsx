@@ -159,11 +159,11 @@ const Banner: React.FC<MovableBlockProps> = ({
                     minConstraints={[150, 150]}
                     maxConstraints={[400, 250]}
                 >
-                    <div className="h-full">
-                        <div
-                            className={`mblock h-full ${ isEdit ? 'mblock--edit' : '' } ${isSet ? '' : 'mblock--not-set'}`}
-                            ref={blockRef as React.RefObject<HTMLDivElement>}
-                        >
+                    <div
+                        className={`mblock h-full ${ isEdit ? 'mblock--edit' : '' } ${isSet ? '' : 'mblock--not-set'}`}
+                        ref={blockRef as React.RefObject<HTMLDivElement>}
+                    >
+                        <div className="h-full">
                             { children }
                         </div>
                         {
@@ -178,11 +178,11 @@ const Banner: React.FC<MovableBlockProps> = ({
                     </div>
                 </ResizableBox>
                 :
-                <div className="">
-                    <div
-                        className={`mblock ${ isEdit ? 'mblock--edit' : '' } ${isSet ? '' : 'mblock--not-set'}`}
-                        ref={blockRef as React.RefObject<HTMLDivElement>}
-                    >
+                <div
+                    className={`mblock ${ isEdit ? 'mblock--edit' : '' } ${isSet ? '' : 'mblock--not-set'}`}
+                    ref={blockRef as React.RefObject<HTMLDivElement>}
+                >
+                    <div>
                         { children }
                     </div>
                     {

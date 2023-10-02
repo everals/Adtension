@@ -5,7 +5,7 @@ import { Logo as LogoInterface } from '../scripts/types';
 import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 interface LogoProps extends LogoInterface {
-    index: number;
+    id: number;
     onUpdateBannerX: (val: number) => void;
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth: (val: number) => void;
@@ -14,7 +14,7 @@ interface LogoProps extends LogoInterface {
 }
 
 const Logo: React.FC<LogoProps> = ({
-    index,
+    id,
     x,
     y,
     width,
@@ -56,6 +56,7 @@ const Logo: React.FC<LogoProps> = ({
                         <Info
                             income={0}
                             reputation={0.5}
+                            id={id}
                         />
                         <div
                             className={`handle`}

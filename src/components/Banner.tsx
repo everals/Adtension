@@ -6,7 +6,7 @@ import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 
 interface BannerProps extends BannerInterface {
-    index: number;
+    id: number;
     onUpdateBannerX: (val: number) => void;
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth: (val: number) => void;
@@ -19,7 +19,7 @@ function rand (a:number, b: number): number {
 }
 
 const Banner: React.FC<BannerProps> = ({
-    index,
+    id,
     color,
     x,
     y,
@@ -74,6 +74,7 @@ const Banner: React.FC<BannerProps> = ({
                             <Info
                                 income={price}
                                 reputation={-1}
+                                id={id}
                             />
                             <div
                                 className={`handle`}

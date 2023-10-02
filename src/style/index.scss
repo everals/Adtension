@@ -172,7 +172,7 @@ body {
     }
 
     &--not-set {
-        .banner {
+        .banner, .news {
             opacity: 0.9;
             border: 2px dashed red;
         }

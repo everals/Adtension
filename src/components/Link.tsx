@@ -6,7 +6,7 @@ import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 
 interface LinkProps extends LinkInterface {
-    index: number;
+    id: number;
     onUpdateBannerX: (val: number) => void;
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth: (val: number) => void;
@@ -19,7 +19,7 @@ function rand (a:number, b: number): number {
 }
 
 const Link: React.FC<LinkProps> = ({
-    index,
+    id,
     color,
     x,
     y,
@@ -59,6 +59,7 @@ const Link: React.FC<LinkProps> = ({
                         <Info
                             income={price}
                             reputation={-1}
+                            id={id}
                         />
                         <div
                             className={`handle`}
