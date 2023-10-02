@@ -6,11 +6,12 @@ import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 
 interface BannerProps extends BannerInterface {
-    index: number,
-    onUpdateBannerX: (val: number) => void,
-    onUpdateBannerY: (val: number) => void,
-    onUpdateBannerWidth: (val: number) => void,
-    onUpdateBannerHeight: (val: number) => void,
+    index: number;
+    onUpdateBannerX: (val: number) => void;
+    onUpdateBannerY: (val: number) => void;
+    onUpdateBannerWidth: (val: number) => void;
+    onUpdateBannerHeight: (val: number) => void;
+    onUpdateBannerSet: (val: boolean) => void;
 }
 
 function rand (a:number, b: number): number {
@@ -28,10 +29,12 @@ const Banner: React.FC<BannerProps> = ({
     height,
     fontType,
     price,
+    isSet,
     onUpdateBannerX,
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
+    onUpdateBannerSet,
 }) => {
     const [ isEdit, setIsEdit ] = useState(false);
     const [ random, setRandom ] = useState(rand(1, 11));
@@ -47,8 +50,10 @@ const Banner: React.FC<BannerProps> = ({
             onUpdateBannerY={onUpdateBannerY}
             onUpdateBannerWidth={onUpdateBannerWidth}
             onUpdateBannerHeight={onUpdateBannerHeight}
+            onUpdateBannerSet={onUpdateBannerSet}
             resizeble
             isEdit={isEdit}
+            isSet={isSet}
         >
             <div
                 className={bannerClasses}

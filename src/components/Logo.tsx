@@ -5,11 +5,12 @@ import { Logo as LogoInterface } from '../scripts/types';
 import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 interface LogoProps extends LogoInterface {
-    index: number,
-    onUpdateBannerX: (val: number) => void,
-    onUpdateBannerY: (val: number) => void,
-    onUpdateBannerWidth: (val: number) => void,
-    onUpdateBannerHeight: (val: number) => void,
+    index: number;
+    onUpdateBannerX: (val: number) => void;
+    onUpdateBannerY: (val: number) => void;
+    onUpdateBannerWidth: (val: number) => void;
+    onUpdateBannerHeight: (val: number) => void;
+    onUpdateBannerSet: (val: boolean) => void;
 }
 
 const Logo: React.FC<LogoProps> = ({
@@ -19,10 +20,12 @@ const Logo: React.FC<LogoProps> = ({
     width,
     height,
     src,
+    isSet,
     onUpdateBannerX,
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
+    onUpdateBannerSet,
 }) => {
     const [ isEdit, setIsEdit ] = useState(false);
     const bannerClasses = `relative h-full ${ isEdit ? 'border-dashed border-2' : '' }`;
@@ -37,7 +40,9 @@ const Logo: React.FC<LogoProps> = ({
             onUpdateBannerY={onUpdateBannerY}
             onUpdateBannerWidth={onUpdateBannerWidth}
             onUpdateBannerHeight={onUpdateBannerHeight}
+            onUpdateBannerSet={onUpdateBannerSet}
             isEdit={isEdit}
+            isSet={isSet}
             resizeble
         >
             <div

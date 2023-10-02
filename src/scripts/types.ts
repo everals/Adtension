@@ -24,6 +24,7 @@ export interface Banner {
     width: number
     height: number;
     isBad?: boolean;
+    isSet: boolean,
     fontType?: number;
 };
 
@@ -37,6 +38,7 @@ export interface News {
     width: number
     height: number;
     isBad?: boolean;
+    isSet: boolean;
 };
 
 export interface Link {
@@ -51,6 +53,7 @@ export interface Link {
     text: string;
     isBad?: boolean;
     fontType?: number;
+    isSet: boolean;
 };
 
 export interface Button {
@@ -65,6 +68,7 @@ export interface Button {
     text: string;
     isBad?: boolean;
     fontType?: number;
+    isSet: boolean;
 };
 
 export interface Logo {
@@ -76,6 +80,7 @@ export interface Logo {
     width: number
     height: number;
     isBad?: boolean;
+    isSet: boolean;
 };
 
 export interface Anal {

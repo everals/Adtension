@@ -7,7 +7,7 @@ import Logo from "../components/Logo";
 
 import DetailsBanner from "../components/DetailsBanner";
 import Bot from "../components/Bot";
-import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction, updateBannerX as updateBannerXAction, updateBannerY as updateBannerYAction, updateBannerWidth as updateBannerWidthAction, updateBannerHeight as updateBannerHeightAction, setReputation as setReputationAction } from '../redux/user';
+import { setEmail as setEmailAction, setBots as setBotsAction, setBalance as setBalanceAction, updateBannerX as updateBannerXAction, updateBannerY as updateBannerYAction, updateBannerWidth as updateBannerWidthAction, updateBannerHeight as updateBannerHeightAction, setReputation as setReputationAction, updateBannerSet as updateBannerSetAction, } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { Banner as BannerInterface, Bot as BotInterface, Button as ButtonInterface, Link as LinkInterface, Logo as LogoInterface,  News as NewsInterface, } from '../scripts/types';
@@ -51,6 +51,7 @@ function Site() {
     const updateBannerY = (payload: { index: number, value: number }) => dispatch(updateBannerYAction(payload));
     const updateBannerWidth = (payload: { index: number, value: number }) => dispatch(updateBannerWidthAction(payload));
     const updateBannerHeight = (payload: { index: number, value: number }) => dispatch(updateBannerHeightAction(payload));
+    const updateBannerSet = (payload: { index: number, value: boolean }) => dispatch(updateBannerSetAction(payload));
 
     const deepCopy = (obj:any) =>  JSON.parse(JSON.stringify(obj)) as typeof obj;
 
@@ -162,6 +163,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: banner.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: banner.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: banner.bannerId, value})}
+                        onUpdateBannerSet={value => updateBannerSet({index: banner.bannerId, value})}
                     />
                 ))
             }
@@ -176,6 +178,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: link.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: link.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: link.bannerId, value})}
+                        onUpdateBannerSet={value => updateBannerSet({index: link.bannerId, value})}
                     />
                 ))
             }
@@ -190,6 +193,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: button.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: button.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: button.bannerId, value})}
+                        onUpdateBannerSet={value => updateBannerSet({index: button.bannerId, value})}
                     />
                 ))
             }
@@ -205,6 +209,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: news.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: news.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: news.bannerId, value})}
+                        onUpdateBannerSet={value => updateBannerSet({index: news.bannerId, value})}
                     />
                 ))
             }
@@ -220,6 +225,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: logo.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: logo.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: logo.bannerId, value})}
+                        onUpdateBannerSet={value => updateBannerSet({index: logo.bannerId, value})}
                     />
                 ))
             }

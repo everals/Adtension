@@ -6,11 +6,12 @@ import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 
 interface NewsProps extends NewsInterface {
-    index: number,
-    onUpdateBannerX: (val: number) => void,
-    onUpdateBannerY: (val: number) => void,
-    onUpdateBannerWidth: (val: number) => void,
-    onUpdateBannerHeight: (val: number) => void,
+    index: number;
+    onUpdateBannerX: (val: number) => void;
+    onUpdateBannerY: (val: number) => void;
+    onUpdateBannerWidth: (val: number) => void;
+    onUpdateBannerHeight: (val: number) => void;
+    onUpdateBannerSet: (val: boolean) => void;
 }
 
 const News: React.FC<NewsProps> = ({
@@ -21,10 +22,12 @@ const News: React.FC<NewsProps> = ({
     text,
     width,
     height,
+    isSet,
     onUpdateBannerX,
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
+    onUpdateBannerSet,
 }) => {
     const [ isEdit, setIsEdit ] = useState(false);
     const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'border-dashed border-2 border-black' : '' }`;
@@ -39,8 +42,10 @@ const News: React.FC<NewsProps> = ({
             onUpdateBannerY={onUpdateBannerY}
             onUpdateBannerWidth={onUpdateBannerWidth}
             onUpdateBannerHeight={onUpdateBannerHeight}
+            onUpdateBannerSet={onUpdateBannerSet}
             resizeble
             isEdit={isEdit}
+            isSet={isSet}
         >
             <div
                 className={bannerClasses}

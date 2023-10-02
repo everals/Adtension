@@ -6,11 +6,12 @@ import Info from '../components/Info';
 import MovableBlock from '../components/MovableBlock';
 
 interface LinkProps extends LinkInterface {
-    index: number,
-    onUpdateBannerX: (val: number) => void,
-    onUpdateBannerY: (val: number) => void,
-    onUpdateBannerWidth: (val: number) => void,
-    onUpdateBannerHeight: (val: number) => void,
+    index: number;
+    onUpdateBannerX: (val: number) => void;
+    onUpdateBannerY: (val: number) => void;
+    onUpdateBannerWidth: (val: number) => void;
+    onUpdateBannerHeight: (val: number) => void;
+    onUpdateBannerSet: (val: boolean) => void;
 }
 
 function rand (a:number, b: number): number {
@@ -27,8 +28,10 @@ const Link: React.FC<LinkProps> = ({
     owner,
     price,
     fontType,
+    isSet,
     onUpdateBannerX,
     onUpdateBannerY,
+    onUpdateBannerSet,
 }) => {
     const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
@@ -37,9 +40,11 @@ const Link: React.FC<LinkProps> = ({
         <MovableBlock
             onUpdateBannerX={onUpdateBannerX}
             onUpdateBannerY={onUpdateBannerY}
+            onUpdateBannerSet={onUpdateBannerSet}
             x={x}
             y={y}
             isEdit={isEdit}
+            isSet={isSet}
         >
             <div
                 className={linkClasses}

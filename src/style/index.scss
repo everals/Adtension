@@ -31,8 +31,14 @@ body {
 
 .react-draggable {
     position: absolute;
-    z-index: 9;
     top: 0;
+    z-index: 30;
+    &:has(.mblock--not-set)  {
+        z-index: 999;
+    }
+    &-dargging {
+        z-index: 999;
+    }
 }
 
 .cursor {
@@ -162,6 +168,13 @@ body {
     &--edit {
         & + .react-resizable-handle {
             display: block;
+        }
+    }
+
+    &--not-set {
+        .banner {
+            opacity: 0.9;
+            border: 2px dashed red;
         }
     }
 }

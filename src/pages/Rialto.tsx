@@ -78,6 +78,7 @@ function Rialto() {
             width: 300,
             height: 300,
             price: 0,
+            isSet: false,
         };
         if ('topic' in rialtos[index] && rialtos[index].topic) {
             // @ts-ignore

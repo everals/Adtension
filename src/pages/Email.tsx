@@ -61,6 +61,7 @@ function Email() {
             width: 300,
             height: 300,
             color: generateColor(),
+            isSet: false,
         });
 
         dispatch(updateEmailDisable({

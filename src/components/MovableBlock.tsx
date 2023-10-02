@@ -22,8 +22,10 @@ interface MovableBlockProps {
     onUpdateBannerY: (val: number) => void;
     onUpdateBannerWidth?: (val: number) => void;
     onUpdateBannerHeight?: (val: number) => void;
+    onUpdateBannerSet: (val: boolean) => void;
 
     isEdit: boolean,
+    isSet: boolean,
 }
 
 function isVerticalOverlap({y: y1, height: height1}: { y: number, height: number }, {y: y2, height: height2 }: { y: number, height: number }) {
@@ -45,13 +47,16 @@ const Banner: React.FC<MovableBlockProps> = ({
     minWidth,
     maxHeight,
     minHeight,
-    onUpdateBannerX,
+    onUpdateBannerX,    
     onUpdateBannerY,
     onUpdateBannerWidth,
     onUpdateBannerHeight,
+    onUpdateBannerSet,
     isEdit,
+    isSet,
 }) => {
     const blockRef = createRef();
+    const [ isCanSet, setIsCanSet ] = useState(false);
     const [ bounds, setBounds ] = useState({
         top: 0,
         left: 0,
@@ -64,6 +69,8 @@ const Banner: React.FC<MovableBlockProps> = ({
         onUpdateBannerY(ui.y);
     };
 
+    const setButtonClasses = `px-4 py-2 text-white rounded transition duration-300 absolute -top-3 left-0 -translate-y-full bg-primary-500 ${ isCanSet ? 'bg-green-500 hover:bg-green-600 cursor-pointer' : 'bg-gray-500 cursor-not-allowed' }`;
+
     const dragHandler = (_: any, ui: {x: number, y: number}) => {
         const blocks = document.querySelectorAll('.mblock') as NodeListOf<HTMLDivElement>;
         let top = 0;
@@ -74,7 +81,24 @@ const Banner: React.FC<MovableBlockProps> = ({
         if (!currentBlock) {
             return;
         }
-        const { width, height } = currentBlock.getBoundingClientRect();;
+        const { width, height } = currentBlock.getBoundingClientRect();
+
+        if (!isSet) {
+            setBounds({ top, left, right, bottom, });
+            for (let block of blocks) {
+                if (blockRef.current === block) {
+                    continue;
+                }
+                const mainBlock = { x: ui.x, y: ui.y + 144, width, height };
+                const extraBlock = block.getBoundingClientRect();
+                if (isHorizontalOverlap(mainBlock, extraBlock) && isVerticalOverlap(mainBlock, extraBlock)) {
+                    setIsCanSet(false);
+                    return; 
+                }
+            }
+            setIsCanSet(true);
+            return;
+        }
 
         for (let block of blocks) {
             if (blockRef.current === block) {
@@ -110,6 +134,13 @@ const Banner: React.FC<MovableBlockProps> = ({
         
     };
 
+    const setItem = () => {
+        if (!isCanSet) {
+            return;
+        }
+        onUpdateBannerSet(true);
+    };
+
     return (
         <Draggable
             onStop={stopHandler}
@@ -128,19 +159,41 @@ const Banner: React.FC<MovableBlockProps> = ({
                     minConstraints={[150, 150]}
                     maxConstraints={[400, 250]}
                 >
+                    <div className="h-full">
+                        <div
+                            className={`mblock h-full ${ isEdit ? 'mblock--edit' : '' } ${isSet ? '' : 'mblock--not-set'}`}
+                            ref={blockRef as React.RefObject<HTMLDivElement>}
+                        >
+                            { children }
+                        </div>
+                        {
+                            isSet ? null :
+                            <div
+                                onClick={ setItem }
+                                className={setButtonClasses}
+                            >
+                                Разместить
+                            </div>
+                        }
+                    </div>
+                </ResizableBox>
+                :
+                <div className="">
                     <div
-                        className={`mblock h-full ${ isEdit ? 'mblock--edit' : '' }`}
+                        className={`mblock ${ isEdit ? 'mblock--edit' : '' } ${isSet ? '' : 'mblock--not-set'}`}
                         ref={blockRef as React.RefObject<HTMLDivElement>}
                     >
                         { children }
                     </div>
-                </ResizableBox>
-                :
-                <div
-                    className={`mblock ${ isEdit ? 'mblock--edit' : '' }`}
-                    ref={blockRef as React.RefObject<HTMLDivElement>}
-                >
-                    { children  }
+                    {
+                        isSet ? null :
+                        <div
+                            onClick={ setItem }
+                            className={setButtonClasses}
+                        >
+                            Разместить
+                        </div>
+                    }
                 </div>
             }
         </Draggable>

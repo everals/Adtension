@@ -24,9 +24,10 @@ const startBanners: Array<AllTypesOfBlocks> = [
       width: 300,
       height: 150,
       src: "electro-shop.ru",
-      price: 17,
+      price: 4,
       owner: 'Илья Мелихов',
       fontType: 5,
+      isSet: true,
    },
    {
       isBanner: true,
@@ -43,6 +44,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
       price: 2,
       owner: 'ООО "МИЛЛИОНЕРОВОРЛД"',
       fontType: 3,
+      isSet: true,
    },
    {
       isButton: true,
@@ -54,6 +56,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
       y: 360,
       text: 'Купить матрас онлайн!',
       fontType: 2,
+      isSet: true,
    },
    {
       isLogo: true,
@@ -64,17 +67,19 @@ const startBanners: Array<AllTypesOfBlocks> = [
       width: 180,
       height: 90,
       src: 'https://cdn.logo.com/hotlink-ok/logo-social.png',
+      isSet: true,
    },
    {
       isLink: true,
       bannerId: 4,
       color: 'rgb(54 124 213)',
-      price: 50,
+      price: 6,
       src: 'vse-shop.pro',
       x: 1005,
       y: 300,
       text: 'Нужны майки? Кликай!',
       fontType: 8,
+      isSet: true,
    },
    {
       isNews: true,
@@ -87,6 +92,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
       height: 320,
       price: 0,
       owner: 'Илья Мелихов',
+      isSet: true,
    },
    {
       isNews: true,
@@ -99,6 +105,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
       height: 340,
       price: 0,
       owner: 'Илья Мелихов',
+      isSet: true,
    },
 ];
 
@@ -171,6 +178,9 @@ const slice = createSlice({
             user.banners[action.payload.index].height = action.payload.value;
          }
       },
+      updateBannerSet(user, action: PayloadAction<{ index: number, value: boolean }>) {
+         user.banners[action.payload.index].isSet = action.payload.value;
+      },
       addBanner(user, action: PayloadAction<Banner>) {
          user.banners.push({
             ...action.payload,
@@ -222,6 +232,7 @@ export const {
    updateHostCount,
    updateBannerX,
    updateBannerY,
+   updateBannerSet,
    updateBannerWidth,
    updateBannerHeight,
 } = slice.actions;
