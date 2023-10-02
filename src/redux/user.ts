@@ -193,7 +193,7 @@ const slice = createSlice({
          if (!banner) return;
          banner.isSet = action.payload.value;
       },
-      addBanner(user, action: PayloadAction<Banner>) {
+      addBanner(user, action: PayloadAction<AllTypesOfBlocks>) {
          user.banners.push({
             ...action.payload,
             bannerId: user.lastBannerId++,

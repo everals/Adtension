@@ -2,8 +2,8 @@ import React, { useState, useEffect, } from 'react';
 import EmailItem from "../components/EmailItem";
 import { greetings, farewells, requests, names } from "../scripts/emailTemplates";
 import { bannerList, badBannerList } from "../scripts/bannerTemplates";
-import { Email as EmailInterface, Banner as BannerInterface, Anal, Rialto, Bot, } from '../scripts/types';
-import { setActiveTab as setActiveTabAction, setEmail as setEmailAction, addBanner as addBannerAction, updateEmailDisable, updateEmailIsNew, removeEmail as removeEmailAction } from '../redux/user';
+import { Email as EmailInterface, Banner as BannerInterface, Anal, Rialto, Bot, AllTypesOfBlocks, } from '../scripts/types';
+import { setActiveTab as setActiveTabAction, setEmail as setEmailAction, addBanner as addBannerAction, updateEmailDisable, updateEmailIsNew, removeEmail as removeEmailAction, } from '../redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 
@@ -17,7 +17,7 @@ function Email() {
     const emails = user.emails;
     const setEmails = (payload: Array<EmailInterface>) => dispatch(setEmailAction(payload));
     const [openEmail , setOpenEmail] = useState<null | number>(null);
-    const addBanner = (payload: BannerInterface) => dispatch(addBannerAction(payload));
+    const addBanner = (payload: AllTypesOfBlocks) => dispatch(addBannerAction(payload));
     const removeEmail = (payload: number) => dispatch(removeEmailAction(payload));
     const setActiveTab = (payload: number) => dispatch(setActiveTabAction(payload));
 
@@ -57,10 +57,13 @@ function Email() {
     };
 
     const handleAddBanner = (index: number) => {
-        // @ts-ignore
+        const email = emails[emails.length - 1 - index];
         addBanner({
-            ...emails[index],
-            isBanner: true,
+            ...email,
+            // @ts-ignore
+            isBanner: email.type === 1,
+            isButton: email.type === 2,
+            isLink: email.type === 3,
             x: 0,
             y: 0,
             width: 300,
@@ -70,7 +73,7 @@ function Email() {
         });
 
         dispatch(updateEmailDisable({
-            index,
+            index: emails.length - 1 - index,
             value: true,
         }));
         setActiveTab(0);

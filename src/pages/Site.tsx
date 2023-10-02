@@ -154,7 +154,7 @@ function Site() {
             }
 
             {
-                banners.filter((ban): ban is BannerInterface => "isBanner" in ban).map((banner, index) => (
+                banners.filter((ban): ban is BannerInterface => "isBanner" in ban && ban.isBanner).map((banner, index) => (
                     <Banner
                         key={banner.bannerId}
                         {...banner}
@@ -169,7 +169,7 @@ function Site() {
             }
 
             {
-                banners.filter((link): link is LinkInterface => "isLink" in link).map((link, index) => (
+                banners.filter((link): link is LinkInterface => "isLink" in link && link.isLink).map((link, index) => (
                     <Link
                         key={link.bannerId}
                         {...link}
@@ -184,7 +184,7 @@ function Site() {
             }
 
             {
-                banners.filter((button): button is ButtonInterface => "isButton" in button).map((button, index) => (
+                banners.filter((button): button is ButtonInterface => "isButton" in button && button.isButton).map((button, index) => (
                     <Button
                         key={button.bannerId}
                         {...button}

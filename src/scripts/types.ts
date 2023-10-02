@@ -8,6 +8,7 @@ export interface Email {
     isNew: boolean;
     isDisable: boolean,
     isBab: boolean,
+    type: number, // 0 - уведомление, 1 - добавление баннера, 2 - добавление кнопки, 3 - добавление ссылки
 };
 
 export interface Banner {
