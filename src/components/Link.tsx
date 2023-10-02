@@ -3,9 +3,11 @@ import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 import { Link as LinkInterface } from '../scripts/types';
 import Info from '../components/Info';
+import MovableBlock from '../components/MovableBlock';
 
 interface LinkProps extends LinkInterface {
     index: number,
+    isEdit: boolean,
     onUpdateBannerX: (val: number) => void,
     onUpdateBannerY: (val: number) => void,
     onUpdateBannerWidth: (val: number) => void,
@@ -28,32 +30,19 @@ const Link: React.FC<LinkProps> = ({
     fontType,
     onUpdateBannerX,
     onUpdateBannerY,
-    onUpdateBannerWidth,
-    onUpdateBannerHeight,
+    isEdit,
 }) => {
-    const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
     const linkClasses = `ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : 'border-solid' }`;
-
-    const stopHandler = (_: any, ui: {x: number, y: number}) => {
-        onUpdateBannerX(ui.x);
-        onUpdateBannerY(ui.y);
-    };
-
     return (
-        <Draggable
-            onStop={stopHandler}
-            scale={1}
-            defaultPosition={{x, y}}
-            bounds={{
-                top: 0,
-            }}
-            handle={isEdit ? '#nothing' : undefined}
+        <MovableBlock
+            onUpdateBannerX={onUpdateBannerX}
+            onUpdateBannerY={onUpdateBannerY}
+            x={x}
+            y={y}
         >
             <div
                 className={linkClasses}
-                onDoubleClick={() => setIsEdit(!isEdit)}
-                onClick={() => setIsEdit(false)}
                 style={{color: color}}
                 data-price={price}
             >
@@ -73,7 +62,7 @@ const Link: React.FC<LinkProps> = ({
                 }
                 { text }
             </div>
-        </Draggable>
+        </MovableBlock>
     );
 };
 

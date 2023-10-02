@@ -3,13 +3,15 @@ import Draggable from "react-draggable";
 import { Resizable, ResizableBox } from "react-resizable";
 import { Button as ButtonInterface } from '../scripts/types';
 import Info from '../components/Info';
+import MovableBlock from '../components/MovableBlock';
 
 interface ButtonProps extends ButtonInterface {
-    index: number,
-    onUpdateBannerX: (val: number) => void,
-    onUpdateBannerY: (val: number) => void,
-    onUpdateBannerWidth: (val: number) => void,
-    onUpdateBannerHeight: (val: number) => void,
+    index: number;
+    onUpdateBannerX: (val: number) => void;
+    onUpdateBannerY: (val: number) => void;
+    onUpdateBannerWidth: (val: number) => void;
+    onUpdateBannerHeight: (val: number) => void;
+    isEdit: boolean;
 }
 
 function rand (a:number, b: number): number {
@@ -28,33 +30,21 @@ const Button: React.FC<ButtonProps> = ({
     fontType,
     onUpdateBannerX,
     onUpdateBannerY,
-    onUpdateBannerWidth,
-    onUpdateBannerHeight,
+    isEdit,
 }) => {
-    const [ isEdit, setIsEdit ] = useState(false);
     const [random, setRandom] = useState(rand(1, 11));
     const buttonClasses = `p-3 border text-white font-bold rounded-xl ad ad-${ fontType || random } ${ isEdit ? 'edit-banner border-dashed border-2' : '' }`;
 
-    const stopHandler = (_: any, ui: {x: number, y: number}) => {
-        onUpdateBannerX(ui.x);
-        onUpdateBannerY(ui.y);
-    };
-
     return (
-        <Draggable
-            onStop={stopHandler}
-            defaultPosition={{x, y}}
-            scale={1}
-            bounds={{
-                top: 0,
-            }}
-            handle={isEdit ? '#nothing' : undefined}
+        <MovableBlock
+            onUpdateBannerX={onUpdateBannerX}
+            onUpdateBannerY={onUpdateBannerY}
+            x={x}
+            y={y}
         >
             <div
                 style={{ background: color, }}
                 className={buttonClasses}
-                onDoubleClick={() => setIsEdit(!isEdit)}
-                onClick={() => setIsEdit(false)}
                 data-price={price}
             >
                 {
@@ -73,7 +63,7 @@ const Button: React.FC<ButtonProps> = ({
                 }
                 { text }
             </div>
-        </Draggable>
+        </MovableBlock>
     );
 };
 

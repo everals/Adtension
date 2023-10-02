@@ -162,6 +162,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: banner.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: banner.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: banner.bannerId, value})}
+                        isEdit={false}
                     />
                 ))
             }
@@ -176,6 +177,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: link.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: link.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: link.bannerId, value})}
+                        isEdit={false}
                     />
                 ))
             }
@@ -190,6 +192,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: button.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: button.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: button.bannerId, value})}
+                        isEdit={false}
                     />
                 ))
             }
@@ -205,6 +208,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: news.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: news.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: news.bannerId, value})}
+                        isEdit={false}
                     />
                 ))
             }
@@ -220,6 +224,7 @@ function Site() {
                         onUpdateBannerY={value => updateBannerY({index: logo.bannerId, value})}
                         onUpdateBannerWidth={value => updateBannerWidth({index: logo.bannerId, value})}
                         onUpdateBannerHeight={value => updateBannerHeight({index: logo.bannerId, value})}
+                        isEdit={false}
                     />
                 ))
             }
