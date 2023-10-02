@@ -27,7 +27,7 @@ const News: React.FC<NewsProps> = ({
     onUpdateBannerHeight,
 }) => {
     const [ isEdit, setIsEdit ] = useState(false);
-    const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'border-dashed border-2' : 'border-solid' }`;
+    const bannerClasses = `news p-6 bg-gray-200 border text-black rounded-xl h-full ${ isEdit ? 'border-dashed border-2 border-black' : '' }`;
 
     return (
         <MovableBlock

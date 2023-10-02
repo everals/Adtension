@@ -35,7 +35,7 @@ const Banner: React.FC<BannerProps> = ({
 }) => {
     const [ isEdit, setIsEdit ] = useState(false);
     const [ random, setRandom ] = useState(rand(1, 11));
-    const bannerClasses = `p-4 border border-black rounded-xl h-full ad ad-${ fontType || random } ${ isEdit ? 'border-dashed border-2' : 'border-solid' }`;
+    const bannerClasses = `banner p-4 border border-black rounded-xl h-full ad ad-${ fontType || random } ${ isEdit ? 'border-dashed border-2' : 'border-solid' }`;
 
     return (
         <MovableBlock

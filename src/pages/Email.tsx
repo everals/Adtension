@@ -82,7 +82,7 @@ function Email() {
                     null
                 }
                 {
-                    emails.map((email, index) => (
+                    [...emails].reverse().map((email, index) => (
                         <EmailItem
                             key={index}
                             {...email}
