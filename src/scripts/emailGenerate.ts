@@ -53,13 +53,20 @@ export const generateBadEmail = (): EmailInterface => {
     }
 };
 
+export function getCurrentTime(): string {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+}
+
 export const generateWorkEmail = (): EmailInterface => {
     const banner = banners[Math.floor(Math.random() * banners.length)];
     const name = generateName();
 
     return {
         name: name,
-        time: `${ rand(1, 30) } часа назад`,
+        time: getCurrentTime(),
         messageText: generateAdvertisementRequest(banner, name),
         text: banner.text,
         title: banner.title,

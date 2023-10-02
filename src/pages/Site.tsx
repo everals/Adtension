@@ -231,18 +231,7 @@ function Site() {
             }
 
 
-            {
-                // detailsVisibleIndex !== null ?
-                // <DetailsBanner
-                //     onHide={hideDetails}
-                //     onEdit={editBanner}
-                //     {...banners[detailsVisibleIndex]}
-                //     index={detailsVisibleIndex}
-                //     isEdit={editBannerIndex !== null}
-                // />
-                // :
-                // null
-            }
+            <DetailsBanner />
         </div>
     );
 }

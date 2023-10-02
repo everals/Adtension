@@ -3,6 +3,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { Email, Banner, Anal, Rialto, Bot, Button, News, Image, Link, AllTypesOfBlocks, } from '../scripts/types';
 
 interface User {
+   isBottonBannerHiden: boolean,
    lastBannerId: number,
    activeTab: number,
    emails: Array<Email>
@@ -110,6 +111,7 @@ const startBanners: Array<AllTypesOfBlocks> = [
 ];
 
 const initialState: User = {
+   isBottonBannerHiden: false,
    lastBannerId: 7,
    activeTab: 0,
    emails: [],
@@ -224,6 +226,9 @@ const slice = createSlice({
       setDomain(user, action: PayloadAction<string>) {
          user.anal.domain = action.payload;
       },
+      setIsBottonBannerHiden(user, action: PayloadAction<boolean>) {
+         user.isBottonBannerHiden= action.payload;
+      },
    },
 });
 
@@ -253,4 +258,5 @@ export const {
    updateBannerSet,
    updateBannerWidth,
    updateBannerHeight,
+   setIsBottonBannerHiden,
 } = slice.actions;

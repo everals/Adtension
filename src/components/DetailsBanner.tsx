@@ -1,64 +1,53 @@
 import React, { useState } from 'react';
 import { AllTypesOfBlocks } from '../scripts/types';
+import { setBalance as setBalanceAction, setIsBottonBannerHiden, } from '../redux/user';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
 
-interface DetailsBannerProps {
-    onHide: Function;
-    onEdit: Function;
-    bannerId: number;
-    title?: string;
-    owner?: string;
-    src?: string;
-    price?: number;
-    index: number,
-    isEdit: boolean,
-}
+interface DetailsBannerProps {}
 
-const DetailsBanner: React.FC<DetailsBannerProps> = ({ onHide, onEdit, bannerId, owner, title, src, price, index, isEdit, }) => {
-    const closeModal = () => {
-        onHide();
+const DetailsBanner: React.FC<DetailsBannerProps> = ({}) => {
+    const dispatch = useDispatch();
+    const balance = useSelector((state: RootState) => state.user.anal.balance);
+    const isBottonBannerHiden = useSelector((state: RootState) => state.user.isBottonBannerHiden);
+    const setBalance = (payload: number) => dispatch(setBalanceAction(payload));
+
+    const deleteModal = () => {
+        setBalance(balance - 50);
+        dispatch(setIsBottonBannerHiden(true));
     };
+
+    if (isBottonBannerHiden) {
+        return null;
+    }
 
     return (
         <div
-            className="fixed bottom-0 inset-x-0 p-4 bg-gray-200 flex flex-col items-center z-50"
+            className="fixed bottom-0 inset-x-0 p-6 bg-gray-200 flex items-center z-50 justify-center"
             style={{
                 boxShadow: '0px 0px 10px 4px rgba(0, 0, 0, 0.2)',
             }}
         >
-            <button
-                className="hover:underline absolute top-2 right-6"
-                onClick={closeModal}
-            >
-                закрыть
-            </button>
-
-            <p className="text-xl font-bold mb-2">
-                { title }
-            </p>
-            <p className="mb-2">
-                Владелец - { owner }
-            </p>
-            <p className="mb-2">
-                Ссылка - { src }
-            </p>
-            <p className="mb-2">
-                Доход - { price } $ в месяц
+            <p className="mr-14">
+                Сайт сделан с помощтю платформы www.make-site.pro! Заходите к нам, если хотите сделать шедевр!
             </p>
             <div>
-                <button
-                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full"
-                    onClick={closeModal}
-                >
-                    Удалить баннер
-                </button>
-                <button
-                    className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full ml-4"
-                    onClick={() => onEdit(isEdit ? null: index)}
-                >
-                    {
-                        isEdit ? 'Сохранить изменения' : 'Редактировать баннер'
-                    }
-                </button>
+                {
+                    balance > 50 ?
+                    <button
+                        className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full"
+                        onClick={deleteModal}
+                    >
+                        Удалить плашку за 50 $
+                    </button>
+                    :
+                    <button
+                        className="bg-пкфн-50 text-white py-2 px-4 rounded-full ml-4"
+                        disabled
+                    >
+                        Удалить плашку за 50 $
+                    </button>
+                }
             </div>
         </div>
     );

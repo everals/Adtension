@@ -25,7 +25,7 @@ function Email() {
         setOpenEmail(openEmail === index ? null : index)
 
         dispatch(updateEmailIsNew({
-            index,
+            index: emails.length - 1 - index,
             value: false,
         }));
     };
