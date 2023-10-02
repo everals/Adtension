@@ -15,6 +15,9 @@ function App() {
     const income = useSelector(getIncome);
     
     useEffect(() => {
+        const newRialtos = generateRialtos();
+        setRialtos(newRialtos);
+
         const emailInterval = setInterval(() => {
             const newEmail = generateEmail();
             addEmail(newEmail);

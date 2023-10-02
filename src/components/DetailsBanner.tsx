@@ -42,7 +42,7 @@ const DetailsBanner: React.FC<DetailsBannerProps> = ({}) => {
                     </button>
                     :
                     <button
-                        className="bg-пкфн-50 text-white py-2 px-4 rounded-full ml-4"
+                        className="bg-gray-500 text-white py-2 px-4 rounded-full ml-4 cursor-not-allowed"
                         disabled
                     >
                         Удалить плашку за 50 $
