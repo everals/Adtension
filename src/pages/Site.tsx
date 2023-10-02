@@ -142,6 +142,20 @@ function Site() {
         };
     }, [bots, setBots]);
 
+    if (user.anal.balance < 0 || user.anal.reputation < 0) {
+        return (
+            <div className="h-screen flex flex-col items-center justify-center -mt-20">
+                <h1 className="text-4xl font-bold">404 - Страница не найдена</h1>
+                {
+                    user.anal.balance < 0 ?
+                    <p className="mt-4">Извините, но ваша сайт был заблокирован за неуплату.</p>
+                    :
+                    <p className="mt-4">Извините, но ваша сайт был заблокирован после жалоб пользователей на недросовестную рекламу.</p>
+                }
+            </div>
+        )
+    }
+
     return (
         <div className="tab relative">
             {
