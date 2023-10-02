@@ -55,7 +55,7 @@ function Anal() {
                 <div className="mb-4">
                     <span className="font-semibold">
                         Баланс:
-                    </span> { user.anal.balance }$
+                    </span> { user.anal.balance } $
                 </div>
                 <div className="mb-4">
                     <span className="font-semibold">
@@ -103,7 +103,7 @@ function Anal() {
                     </span> { banners.filter((link): link is LinkInterface => "isLink" in link).length }
                 </div>
             </div>
-            <div className="w-6/12 p-4">
+            <div className="p-4" style={{ width: '700px', }}>
                 <div className="text-xl font-semibold mb-6">
                     Средний доход с рекламы
                 </div>
