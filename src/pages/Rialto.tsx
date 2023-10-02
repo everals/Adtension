@@ -105,7 +105,7 @@ function Rialto() {
     }, []);
 
     return (
-        <div className="tab">
+        <div className="tab px-12 mt-6">
             <div className="flex flex-wrap">
                 {
                     rialtos.map((rialto, index) => (

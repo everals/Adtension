@@ -7,6 +7,7 @@ export interface Email {
     price: number;
     isNew: boolean;
     isDisable: boolean,
+    isBab: boolean,
 };
 
 export interface Banner {

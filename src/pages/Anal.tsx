@@ -24,7 +24,7 @@ function Anal() {
     const income = getIncome();
 
     return (
-        <div className="tab">
+        <div className="tab px-12 mt-8">
             <div className="p-4">
                 <div className="text-xl font-semibold mb-6">
                     Аналитика сайта

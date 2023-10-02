@@ -128,6 +128,9 @@ const slice = createSlice({
       setEmail(user, action: PayloadAction<Array<Email>>) {
          user.emails = action.payload;
       },
+      addEmail(user, action: PayloadAction<Email>) {
+         user.emails.push(action.payload);
+      },
       updateEmailDisable(user, action: PayloadAction<{ index: number, value: boolean }>) {
          user.emails[action.payload.index].isDisable = action.payload.value;
       },
@@ -179,6 +182,9 @@ const slice = createSlice({
       setBalance(user, action: PayloadAction<number>) {
          user.anal.balance = action.payload;
       },
+      chagneBalance(user, action: PayloadAction<number>) {
+         user.anal.balance += action.payload;
+      },
       setReputation(user, action: PayloadAction<number>) {
          user.anal.reputation = action.payload;
       },
@@ -189,4 +195,25 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-export const { setActiveTab, setEmail, setBanner, addBanner, setRialtos, removeRialto, setBots, setBalance, setReputation, setDomain, updateEmailDisable, updateEmailIsNew, updateDomain, updateHostCount,  updateBannerX, updateBannerY, updateBannerWidth, updateBannerHeight, } = slice.actions;
+export const {
+   setActiveTab,
+   setEmail,
+   addEmail,
+   setBanner,
+   addBanner,
+   setRialtos,
+   removeRialto,
+   setBots,
+   setBalance,
+   chagneBalance,
+   setReputation,
+   setDomain,
+   updateEmailDisable,
+   updateEmailIsNew,
+   updateDomain,
+   updateHostCount,
+   updateBannerX,
+   updateBannerY,
+   updateBannerWidth,
+   updateBannerHeight,
+} = slice.actions;

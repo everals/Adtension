@@ -18,19 +18,26 @@ const EmailItem: React.FC<EmailItemProps> = ({ name, time, messageText, price, i
 
     return (
         <div className="bg-gray-200 p-4 rounded mb-4 flex flex-wrap cursor-pointer" onClick={handleClick}>
-            <div className="w-2/12 p-2 font-semibold flex">
+            <div className="w-3/12 p-2 font-semibold flex">
                 {
                     <div className={`w-2 h-2 mr-2 mt-2 rounded-full ${ isNew ? 'bg-green-500' : ''}`}/>
                 }
                 { name }
             </div>
             <div
-                className={`mail w-8/12 p-2 ${isOpen ? 'mail--open' : 'mail--close'}`}
+                className={`mail w-7/12 p-2 ${isOpen ? 'mail--open' : 'mail--close'}`}
                 dangerouslySetInnerHTML={{__html: messageText}}
             />
-            <div className="w-1/12 p-2 text-green-600 font-bold">
-                { price } $
-            </div>
+            {
+                price < 0 ?
+                <div className="w-1/12 p-2 text-red-600 font-bold">
+                    { price } $
+                </div>
+                :
+                <div className="w-1/12 p-2 text-green-600 font-bold">
+                    { price } $
+                </div>
+            }
             <div className="w-1/12 p-2 text-gray-500 text-sm">
                 { time }
             </div>
@@ -38,6 +45,9 @@ const EmailItem: React.FC<EmailItemProps> = ({ name, time, messageText, price, i
                 isOpen ?
                 <div className="w-9/12 p-2 flex justify-end items-center">
                     {
+                    price < 0 ?
+                        null
+                    :
                     isDisable ?
                         <button
                             className="px-4 py-2 bg-gray-500 text-white rounded cursor-not-allowed"
