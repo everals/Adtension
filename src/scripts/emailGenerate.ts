@@ -114,10 +114,10 @@ export const generateWorkEmail = (): EmailInterface => {
 };
 
 export const generateEmail = (): EmailInterface => {
-    if (rand(1, 30) === 1) {
+    if (rand(1, 10) === 1) {
         return generateSpamEmail()
     } 
-    if (rand(1, 20) === 1) {
+    if (rand(1, 10) === 1) {
         return generateBadEmail()
     } 
     return generateWorkEmail()
